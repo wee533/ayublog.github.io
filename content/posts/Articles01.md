@@ -5,11 +5,11 @@ lastmod: 2026-04-11T22:50:00+08:00
 draft: false
 tags: ["Hugo", "博客搭建", "Moments主题"]
 categories: ["技术分享"]
-author: "你的名字"
+author: "啊钰"
 description: "记录我的 Hugo 博客搭建全过程，从踩坑到成功的完整分享"
 ---
 
-# 我的第一篇 Hugo 博客文章
+
 
 哈喽！这是我用 Hugo + Moments 主题搭建的个人博客，终于成功跑起来啦 🎊
 
