@@ -1,5 +1,5 @@
 # 基础网站设置
-baseURL = "http://localhost:1313/"
+baseURL = "https://wee533.github.io/ayublog.github.io/"
 languageCode = "zh-CN"
 title = "我的 papers 博客"
 theme = "hugo-paper-main" # 这里必须和你的主题文件夹名字完全一致
