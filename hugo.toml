@@ -5,8 +5,8 @@ title = "我的 papers 博客"
 theme = "hugo-paper-main" # 这里必须和你的主题文件夹名字完全一致
 
 # 核心设置：解决路径与样式问题
-relativeURLs = true
-canonifyURLs = false
+relativeURLs = false
+canonifyURLs = true
 enableRobotsTXT = true
 
 # 内容构建设置
