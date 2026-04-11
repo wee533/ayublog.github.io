@@ -7,10 +7,28 @@ relativeURLs = false
 canonifyURLs = true
 enableRobotsTXT = true
 
+[params]
+theme = "light"
+subtitle = "欢迎来到我的 Hugo 博客 🎉"
+copyright = "© 2026 我的 papers 博客"
+
 [params.comment.utterances]
 enable = true
 repo = "wee533/ayublog.github.io"
 issueTerm = "pathname"
 theme = "github-light"
 label = "blog-comment"
-    weight = 3
+
+[menu]
+[[menu.main]]
+name = "首页"
+url = "/"
+weight = 1
+[[menu.main]]
+name = "文章"
+url = "/posts/"
+weight = 2
+[[menu.main]]
+name = "关于"
+url = "/about/"
+weight = 3
