@@ -1,57 +1,18 @@
-# 基础网站设置
+# 基础配置
 baseURL = "https://wee533.github.io/ayublog.github.io/"
 languageCode = "zh-CN"
 title = "我的 papers 博客"
-theme = "hugo-paper-main" # 这里必须和你的主题文件夹名字完全一致
+# 【核心！强制切换到Moments主题，必须和文件夹名完全一致】
+theme = "hugo-theme-moments-dev"
 
-# 核心设置：解决路径与样式问题
+# 路径配置（解决样式加载的关键）
 relativeURLs = false
 canonifyURLs = true
 enableRobotsTXT = true
 
-# 内容构建设置
-buildDrafts = false
-buildFuture = false
-buildExpired = false
-
-# 分页设置
-paginate = 10
-
-# 菜单配置 (导航栏)
-[menu]
-  [[menu.main]]
-    name = "首页"
-    url = "/"
-    weight = 1
-
-  [[menu.main]]
-    name = "文章"
-    url = "/posts/"
-    weight = 2
-
-  [[menu.main]]
-    name = "关于"
-    url = "/about/"
-    weight = 3
-
-# 主题自定义参数 (根据 Moments 主题标准配置)
+# Moments主题基础配置
 [params]
-  # 网站副标题
-  subtitle = "Welcome to My Moments"
-  
-  # 首页布局：可选 'posts' (文章列表), 'about' (关于我), 'projects' 等
-  homeLayout = "posts"
-  
-  # 主题样式
-  defaultTheme = "auto" # auto/light/dark
-  accentColor = "blue"  # 主题强调色
-  
-  # 功能显示
-  showToc = true
-  showReadingTime = true
-  showShareButtons = false
-  showBreadCrumbs = true
-  
-  # 页脚信息
-  copyright = "© 2026 My New Hugo Project"
-  since = 2026
+  # 主题模式：light/dark
+  theme = "light"
+  # 首页副标题
+  subtitle = "欢迎来到我的博客"
