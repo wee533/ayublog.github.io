@@ -1,4 +1,0 @@
-{ {{ $a := where $.Site.RegularPages "Section" .Section}}{{ if .IsHome }}{{ $a = $.Site.RegularPages }}{{ end }}
-    "sectionName": "{{ default "index" .Section }}",
-    "momentCount": {{ len $a }}
-}

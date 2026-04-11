@@ -1,3 +1,0 @@
-- [首页](/)
-- [Moment 发布指南](/moment-publishing-guide)
-- [更新记录](/changelogs)

@@ -1,18 +1,16 @@
-# 基础配置
 baseURL = "https://wee533.github.io/ayublog.github.io/"
 languageCode = "zh-CN"
 title = "我的 papers 博客"
-# 【核心！强制切换到Moments主题，必须和文件夹名完全一致】
-theme = "hugo-theme-moments-dev"
+theme = "hugo-paper-main"
 
-# 路径配置（解决样式加载的关键）
 relativeURLs = false
 canonifyURLs = true
 enableRobotsTXT = true
 
-# Moments主题基础配置
-[params]
-  # 主题模式：light/dark
-  theme = "light"
-  # 首页副标题
-  subtitle = "欢迎来到我的博客"
+[params.comment.utterances]
+enable = true
+repo = "wee533/ayublog.github.io"
+issueTerm = "pathname"
+theme = "github-light"
+label = "blog-comment"
+    weight = 3
