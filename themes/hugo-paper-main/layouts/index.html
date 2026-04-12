@@ -1,0 +1,65 @@
+{{ define "main" }}
+  <div class="container">
+    <!-- 首页标签云 -->
+    <div class="tags-cloud">
+      <h2>标签</h2>
+      {{ range .Site.Taxonomies.tags }}
+        <a href=" " class="tag-item">
+          # {{ .Page.Title }}
+        </a >
+      {{ end }}
+    </div>
+
+    <!-- 文章列表 -->
+    <div class="posts">
+      {{ range .Site.RegularPages }}
+        <article class="post">
+          <h2 class="post-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a >
+          </h2>
+          <div class="post-meta">
+            <time>{{ .Date.Format "Jan 2, 2006" }}</time>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+
+  <style>
+    .tags-cloud {
+      margin: 2rem 0;
+    }
+    .tags-cloud h2 {
+      margin-bottom: 1rem;
+    }
+    .tag-item {
+      display: inline-block;
+      margin-right: 1rem;
+      margin-bottom: 0.5rem;
+      padding: 0.3rem 0.8rem;
+      background: #f5f5f5;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.2s;
+    }
+    .tag-item:hover {
+      background: #6366f1;
+      color: white;
+    }
+    .posts {
+      margin-top: 2rem;
+    }
+    .post {
+      margin-bottom: 2rem;
+    }
+    .post-title a {
+      text-decoration: none;
+      color: #333;
+    }
+    .post-meta {
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+{{ end }}
