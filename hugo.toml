@@ -2,7 +2,6 @@ baseURL = "/"
 languageCode = "zh-CN"
 title = "我的 papers 博客"
 theme = "hugo-paper-main"
-
 relativeURLs = false
 canonifyURLs = false
 enableRobotsTXT = true
@@ -11,6 +10,23 @@ enableRobotsTXT = true
 theme = "light"
 subtitle = "欢迎来到我的 Hugo 博客 🎉"
 copyright = "© 2026 我的 papers 博客"
+
+# 📌 Umami 后端埋点（确保统计数据正常上报）
+[params.analytics.umami]
+enable = true
+website_id = "913c1097-863d-43b7-9b47-e0fd9807aab0"
+src = "https://cloud.umami.is/script.js"
+host_url = "https://cloud.umami.is"
+auto_track = true
+do_not_track = false
+
+# 📌 Umami 前端展示（让博客显示访客数的核心配置）
+[params.footer]
+show_visitor = true
+analytics = "umami"
+umami_host = "https://cloud.umami.is"
+umami_website_id = "913c1097-863d-43b7-9b47-e0fd9807aab0"
+umami_share_id = "MAR6qGwsGf1o9t0P"
 
 [params.comment.utterances]
 enable = true
@@ -24,11 +40,8 @@ label = "blog-comment"
 name = "首页"
 url = "/"
 weight = 1
+
 [[menu.main]]
 name = "文章"
 url = "/posts/"
 weight = 2
-[[menu.main]]
-name = "关于"
-url = "/about/"
-weight = 3
