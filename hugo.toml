@@ -20,13 +20,13 @@ host_url = "https://cloud.umami.is"
 auto_track = true
 do_not_track = false
 
-# 📌 Umami 前端展示（让博客显示访客数的核心配置，必须完整！）
 [params.footer]
-show_visitor = true
-analytics = "umami"
-umami_host = "https://cloud.umami.is"
-umami_website_id = "913c1097-863d-43b7-9b47-e0fd9807aab0"
-umami_share_id = "MAR6qGwsGf1o9t0P"
+# 核心：关闭访客统计 UI（设为 false）
+show_visitor = false
+
+# 页脚保留默认文字（干净、简洁）
+copyright = "© 2026 我的 PAPPERS 博客"
+powered_by = true
 
 [params.comment.utterances]
 enable = true
