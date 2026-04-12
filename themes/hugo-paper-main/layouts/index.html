@@ -1,0 +1,122 @@
+{{ define "main" }}
+<div class="container">
+  <!-- 首页Hero个人简介 -->
+  <div class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">你好，我是钰 👋</h1>
+      <p class="hero-bio">欢迎你常来！</p >
+      <div class="hero-tags">
+        {{ range .Site.Taxonomies.tags }}
+          <a href=" " class="hero-tag">#{{ .Page.Title }}</a >
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  <!-- 文章列表 -->
+  <div class="posts-list">
+    <h2 class="list-title">最新文章</h2>
+    {{ range .Site.RegularPages }}
+      <article class="post-item">
+        <a href="{{ .RelPermalink }}" class="post-link">
+          <h3 class="post-title">{{ .Title }}</h3>
+          <div class="post-meta">
+            <time class="post-date">{{ .Date.Format "Jan 2, 2006" }}</time>
+            {{ if .Params.tags }}
+              <div class="post-tags">
+                {{ range .Params.tags }}
+                  <span class="post-tag">#{{ . }}</span>
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+        </a >
+      </article>
+    {{ end }}
+  </div>
+</div>
+
+<style>
+/* 完全适配Paper主题的样式，不冲突 */
+.hero {
+  margin: 4rem 0;
+  text-align: center;
+}
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #333;
+}
+.hero-bio {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.hero-tag {
+  padding: 0.4rem 1rem;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 20px;
+  text-decoration: none;
+  color: #6366f1;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.hero-tag:hover {
+  background: #6366f1;
+  color: white;
+}
+
+.posts-list {
+  margin: 4rem 0;
+}
+.list-title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+.post-item {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #fafafa;
+  transition: all 0.2s;
+}
+.post-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
+.post-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+.post-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+.post-tag {
+  color: #6366f1;
+  font-size: 0.8rem;
+}
+</style>
+{{ end }}
