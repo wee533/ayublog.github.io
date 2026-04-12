@@ -6,8 +6,15 @@
     <description>Recent content in Categories on 我的 papers 博客</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 11 Apr 2026 22:50:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2026 16:00:00 +0800</lastBuildDate>
     <atom:link href="//localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>技术</title>
+      <link>//localhost:1313/categories/%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Sun, 12 Apr 2026 16:00:00 +0800</pubDate>
+      <guid>//localhost:1313/categories/%E6%8A%80%E6%9C%AF/</guid>
+      <description></description>
+    </item>
     <item>
       <title>技术分享</title>
       <link>//localhost:1313/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/</link>

@@ -20,7 +20,7 @@ host_url = "https://cloud.umami.is"
 auto_track = true
 do_not_track = false
 
-# 📌 Umami 前端展示（让博客显示访客数的核心配置）
+# 📌 Umami 前端展示（让博客显示访客数的核心配置，必须完整！）
 [params.footer]
 show_visitor = true
 analytics = "umami"
@@ -36,12 +36,32 @@ theme = "github-light"
 label = "blog-comment"
 
 [menu]
+# 首页
 [[menu.main]]
 name = "首页"
 url = "/"
 weight = 1
 
+# 所有文章
 [[menu.main]]
 name = "文章"
 url = "/posts/"
 weight = 2
+
+# 归档（按时间汇总）
+[[menu.main]]
+name = "归档"
+url = "/archives/"
+weight = 3
+
+# 标签分类
+[[menu.main]]
+name = "标签"
+url = "/tags/"
+weight = 4
+
+# 关于
+[[menu.main]]
+name = "关于"
+url = "/about/"
+weight = 5
