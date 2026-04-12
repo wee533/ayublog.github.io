@@ -17,24 +17,7 @@
     target="_blank"
     >hugo-paper</a
   >
-  <!-- Umami 访客数卡片显示 -->
-<div class="visitor-card" style="max-width: 400px; margin: 2rem auto; padding: 1rem; border-radius: 8px; background: rgba(0,0,0,0.05); text-align: center;">
-  <h3 style="margin: 0 0 1rem 0; font-size: 1rem;">博客访问统计</h3>
-  <div style="display: flex; justify-content: space-around;">
-    <div>
-      <div style="font-size: 1.5rem; font-weight: bold;" id="umami-pv-card">--</div>
-      <div style="font-size: 0.8rem; opacity: 0.8;">总访问量</div>
-    </div>
-    <div>
-      <div style="font-size: 1.5rem; font-weight: bold;" id="umami-uv-card">--</div>
-      <div style="font-size: 0.8rem; opacity: 0.8;">访客数</div>
-    </div>
-  </div>
-</div>
 
-<script>
-const WEBSITE_ID = '913c1097-863d-43b7-9b47-e0fd9807aab0';
-const API_URL = 'https://cloud.umami.is/api';
 
 async function fetchStats() {
   try {
