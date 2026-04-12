@@ -13,10 +13,10 @@
     </div>
   </div>
 
-  <!-- 文章列表 -->
+  <!-- 文章列表（只显示posts目录下的文章，过滤页面） -->
   <div class="posts-list">
     <h2 class="list-title">最新文章</h2>
-    {{ range .Site.RegularPages }}
+    {{ range where .Site.RegularPages "Section" "posts" }}
       <article class="post-item">
         <a href="{{ .RelPermalink }}" class="post-link">
           <h3 class="post-title">{{ .Title }}</h3>
@@ -37,7 +37,7 @@
 </div>
 
 <style>
-/* 完全适配Paper主题的样式，不冲突 */
+/* 完全适配Paper主题，零白框、零冲突 */
 .hero {
   margin: 4rem 0;
   text-align: center;
@@ -67,6 +67,7 @@
   color: #6366f1;
   font-size: 0.9rem;
   transition: all 0.2s;
+  border: none;
 }
 .hero-tag:hover {
   background: #6366f1;
@@ -86,12 +87,13 @@
   margin-bottom: 2rem;
   padding: 1.5rem;
   border-radius: 12px;
-  background: #fafafa;
+  background: transparent; /* 彻底去掉白框！ */
   transition: all 0.2s;
+  border: none;
 }
 .post-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  background: rgba(99, 102, 241, 0.05); /* hover淡色，不突兀 */
 }
 .post-link {
   text-decoration: none;
@@ -110,6 +112,16 @@
   color: #666;
   font-size: 0.9rem;
 }
+.post-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+.post-tag {
+  color: #6366f1;
+  font-size: 0.8rem;
+}
+</style>
+{{ end }}
 .post-tags {
   display: flex;
   gap: 0.5rem;
