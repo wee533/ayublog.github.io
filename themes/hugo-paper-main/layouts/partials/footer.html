@@ -19,19 +19,6 @@
   >
 
 
-async function fetchStats() {
-  try {
-    const pvRes = await fetch(`${API_URL}/websites/${WEBSITE_ID}/stats?startAt=0&endAt=${Date.now()}`);
-    const pvData = await pvRes.json();
-    document.getElementById('umami-pv-card').textContent = pvData.pageviews.value;
-
-    const uvRes = await fetch(`${API_URL}/websites/${WEBSITE_ID}/stats?startAt=0&endAt=${Date.now()}&type=visitors`);
-    const uvData = await uvRes.json();
-    document.getElementById('umami-uv-card').textContent = uvData.visitors.value;
-  } catch (err) {
-    console.log('Umami 统计加载失败:', err);
-  }
-}
 
 window.addEventListener('load', fetchStats);
 </script>
