@@ -1,0 +1,39 @@
+{{ define "main" }}
+<div class="container">
+  <h1 class="title">标签</h1>
+  <div class="tags-list">
+    {{ range .Site.Taxonomies.tags }}
+      <a href=" " class="tag-item">
+        # {{ .Page.Title }}
+        <span class="count">({{ .Count }})</span>
+      </a >
+    {{ end }}
+  </div>
+</div>
+
+<style>
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.tag-item {
+  padding: 0.5rem 1rem;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.2s;
+}
+.tag-item:hover {
+  background: #6366f1;
+  color: white;
+}
+.count {
+  opacity: 0.7;
+  font-size: 0.8rem;
+  margin-left: 0.3rem;
+}
+</style>
+{{ end }}
