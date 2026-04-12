@@ -1,9 +1,9 @@
-baseURL = "https://wee533.github.io/ayublog.github.io/"
+baseURL = "https://ayublogisok.netlify.app/"
 languageCode = "zh-CN"
 title = "钰de个人博客"
 theme = "hugo-paper-main"
 relativeURLs = false
-canonifyURLs = false
+canonifyURLs = true
 enableRobotsTXT = true
 [taxonomies]
 tag = "tags"
