@@ -35,6 +35,18 @@ issueTerm = "pathname"
 theme = "github-light"
 label = "blog-comment"
 
+[params]
+# 显示文章摘要（在文章里加 <!--more--> 就会显示摘要）
+show_summary = true
+# 显示阅读时间
+show_reading_time = true
+# 显示标签
+show_tags = true
+# 显示分类
+show_categories = true
+# 文章列表每页显示数量
+paginate = 5
+
 [menu]
 # 首页
 [[menu.main]]
