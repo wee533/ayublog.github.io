@@ -1,7 +1,10 @@
 {{ define "main" }}
-  <div class="container">
-    <h1 class="title">标签</h1>
-    <div class="tags-cloud">
+<div class="container">
+  <h1 class="title">标签</h1>
+  {{ if eq (len .Site.Taxonomies.tags) 0 }}
+    <p class="empty-tip">还没有添加标签哦～</p >
+  {{ else }}
+    <div class="tags-list">
       {{ range .Site.Taxonomies.tags }}
         <a href=" " class="tag-item">
           <span class="tag-name">{{ .Page.Title }}</span>
@@ -9,31 +12,36 @@
         </a >
       {{ end }}
     </div>
-  </div>
+  {{ end }}
+</div>
 
-  <style>
-    .tags-cloud {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .tag-item {
-      padding: 0.5rem 1rem;
-      background: #f0f0f0;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #333;
-      transition: all 0.2s;
-    }
-    .tag-item:hover {
-      background: #6366f1;
-      color: white;
-    }
-    .tag-count {
-      opacity: 0.7;
-      font-size: 0.8rem;
-      margin-left: 0.3rem;
-    }
-  </style>
+<style>
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.tag-item {
+  padding: 0.5rem 1rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.2s;
+}
+.tag-item:hover {
+  background: #6366f1;
+  color: #fff;
+}
+.tag-count {
+  opacity: 0.7;
+  font-size: 0.8rem;
+  margin-left: 0.3rem;
+}
+.empty-tip {
+  margin-top: 2rem;
+  color: #666;
+}
+</style>
 {{ end }}
