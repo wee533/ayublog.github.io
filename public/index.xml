@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Moments主题 on 我的 papers 博客</title>
-    <link>//localhost:1313/tags/moments%E4%B8%BB%E9%A2%98/</link>
-    <description>Recent content in Moments主题 on 我的 papers 博客</description>
+    <title>首页 on 我的 papers 博客</title>
+    <link>//localhost:1313/</link>
+    <description>Recent content in 首页 on 我的 papers 博客</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 11 Apr 2026 22:50:00 +0800</lastBuildDate>
-    <atom:link href="//localhost:1313/tags/moments%E4%B8%BB%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>我的第一篇 Hugo 博客文章 🎉</title>
       <link>//localhost:1313/posts/articles01/</link>

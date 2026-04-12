@@ -1,10 +1,10 @@
-baseURL = "https://wee533.github.io/ayublog.github.io/"
+baseURL = "/"
 languageCode = "zh-CN"
 title = "我的 papers 博客"
 theme = "hugo-paper-main"
 
 relativeURLs = false
-canonifyURLs = true
+canonifyURLs = false
 enableRobotsTXT = true
 
 [params]
