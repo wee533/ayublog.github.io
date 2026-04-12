@@ -7,11 +7,8 @@
     <a class="link" href="{{- `` | absURL -}}">{{- site.Title -}}</a>
     {{- end -}}
   </div>
-  <footer style="text-align: center;">
-    <div class="copyright">
-      {{ .Site.Params.footer.copyright | default (printf "© %s %s" now.Year .Site.Title) }}
-    </div>
-  </footer>
-  
+  <footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center justify-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
 </script>
 </footer>
