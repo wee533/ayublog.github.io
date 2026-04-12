@@ -5,6 +5,9 @@ theme = "hugo-paper-main"
 relativeURLs = false
 canonifyURLs = false
 enableRobotsTXT = true
+[taxonomies]
+tag = "tags"
+category = "categories"
 
 # ==============================================
 # 🔥 唯一的根 Params 配置（所有参数都合并在这里，绝不重复！）
