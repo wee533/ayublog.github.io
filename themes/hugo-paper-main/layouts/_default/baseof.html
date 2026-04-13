@@ -1,56 +1,83 @@
-<!doctype html>
+baseURL = "https://ayublog-github-io.vercel.app/"
+languageCode = "zh-CN"
+title = "钰de个人博客"
+theme = "hugo-paper-main"
+# 关键修复：关闭relativeURLs，恢复绝对路径，让CSS正常加载
+relativeURLs = false
+canonifyURLs = true
+enableRobotsTXT = true
+assetDir = "assets"
+publishDir = "public"
 
-{{- $.Scratch.Delete "bg_color" -}}<!---->
-{{- $.Scratch.Delete "social_list" -}}<!---->
-{{- $.Scratch.Delete "avatar_url" -}}<!---->
+[taxonomies]
+tag = "tags"
+category = "categories"
 
-<!-- bg_color -->
-{{- $color_map := dict "linen" "#faf8f1" "wheat" "#f8f5d7" "gray" "#fbfbfb"
-"light" "#fff" -}}<!---->
-{{- $.Scratch.Set "bg_color" (index $color_map (site.Params.color | default
-(print "linen"))) -}}<!---->
-{{- $bg_color := $.Scratch.Get "bg_color" -}}<!---->
+[params]
+theme = "light"
+subtitle = "欢迎来到我的 Hugo 博客"
+copyright = "© 2026 钰的个人博客"
 
-<!-- social_list -->
-{{- $social_params := slice "twitter" "github" "instagram" "linkedin" "mastodon"
-"threads" "bluesky" "rss" -}}<!---->
-{{- range $social_params -}}<!---->
-{{- if isset site.Params . -}}<!---->
-{{- $.Scratch.Add "social_list" (slice .) -}}<!---->
-{{- end -}}<!---->
-{{- end -}}<!---->
+show_summary = true
+show_reading_time = true
+show_tags = true
+show_categories = true
+paginate = 5
+pinned = true
 
-<!-- avatar_url -->
-{{- if site.Params.avatar -}}<!---->
-{{- if in site.Params.avatar "http" -}}<!---->
-{{- $.Scratch.Set "avatar_url" site.Params.avatar -}}<!---->
-{{- else -}}<!---->
-{{- $official_cdn := "https://www.gravatar.com/avatar/" -}}<!---->
-{{- $cdn := (site.Params.gravatarCdn | default $official_cdn) -}}<!---->
-{{- $md5 := (md5 site.Params.avatar) -}}<!---->
-{{- $avatar_url := print $cdn $md5 "?s=160&d=identicon" -}}<!---->
-{{- $.Scratch.Set "avatar_url" $avatar_url -}}<!---->
-{{- end -}}<!---->
-{{- end -}}<!---->
+primary_color = "#6366f1"
+background_color = "#fafafa"
+# 修复文字颜色，避免纯白看不见
+text_color = "#333333"
+link_color = "#6366f1"
+dark_mode = true
 
-<html
-  class="not-ready lg:text-base"
-  style="--bg: {{- $bg_color -}}"
-  lang="{{- or site.LanguageCode site.Language.Lang -}}"
-  dir="{{- if site.Params.direction -}}{{- site.Params.direction -}}{{- else -}}ltr{{- end -}}"
->
-  {{- partial "head.html" . -}}
-  <body
-    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
-  >
-    {{- partial "header.html" . -}}
+[params.search]
+enable = true
+type = "local"
 
-    <main
-      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
-    >
-      {{- block "main" . -}}{{- end -}}
-    </main>
+[params.toc]
+enable = true
+depth = 3
+mobile_collapse = true
 
-    {{- partial "footer.html" . -}}
-  </body>
-</html>
+[params.footer]
+show_visitor = false
+powered_by = false
+social = [
+  { name = "GitHub", url = "https://github.com/wee533", icon = "github" }
+]
+
+[params.analytics.umami]
+enable = true
+website_id = "913c1097-863d-43b7-9b47-e0fd9807aab0"
+src = "https://cloud.umami.is/script.js"
+host_url = "https://cloud.umami.is"
+auto_track = true
+do_not_track = false
+
+[menu]
+[[menu.main]]
+name = "首页"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "文章"
+url = "/posts/"
+weight = 2
+
+[[menu.main]]
+name = "归档"
+url = "/archives/"
+weight = 3
+
+[[menu.main]]
+name = "标签"
+url = "/tags/"
+weight = 4
+
+[[menu.main]]
+name = "关于"
+url = "/about/"
+weight = 5
