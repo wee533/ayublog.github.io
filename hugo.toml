@@ -1,4 +1,4 @@
-baseURL = "https://ayublogisok.netlify.app/"
+baseURL = "https://ayublog.vercel.app/"
 languageCode = "zh-CN"
 title = "钰de个人博客"
 theme = "hugo-paper-main"
