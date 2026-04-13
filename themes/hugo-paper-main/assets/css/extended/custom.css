@@ -1,0 +1,48 @@
+/* 适配 Moments 主题的文章链接样式优化 */
+/* 普通模式链接 */
+.post-content a {
+  color: #3b82f6 !important; /* 明亮蓝色，清晰不刺眼 */
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important; /* 下划线和文字间距 */
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+
+/* 鼠标悬浮效果 */
+.post-content a:hover {
+  color: #60a5fa !important; /* 悬浮变浅蓝 */
+  text-decoration-thickness: 2px !important; /* 下划线变粗 */
+}
+
+/* 暗黑模式链接（适配你现在的深色首页） */
+@media (prefers-color-scheme: dark) {
+  .post-content a {
+    color: #60a5fa !important; /* 深色模式下更亮的蓝 */
+  }
+  .post-content a:hover {
+    color: #93c5fd !important;
+  }
+}
+
+/* 首页文章标题链接强化（你截图里的文章标题） */
+.post-list-item .post-title a {
+  color: #f3f4f6 !important; /* 深色模式下标题更亮 */
+  text-decoration: none !important;
+  font-weight: 600 !important;
+}
+.post-list-item .post-title a:hover {
+  color: #60a5fa !important; /* 悬浮变蓝 */
+  text-decoration: underline !important;
+}
+
+/* 标签链接样式 */
+.post-tags a {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.1) !important;
+}
+@media (prefers-color-scheme: dark) {
+  .post-tags a {
+    color: #60a5fa !important;
+    background: rgba(96, 165, 250, 0.1) !important;
+  }
+}
