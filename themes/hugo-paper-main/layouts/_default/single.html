@@ -21,6 +21,28 @@
 
   <section>{{- .Content -}}</section>
 
+  <!-- 👇 Waline 评论（已为你插入） -->
+  {{- if (not .Params.disableComments) -}}
+  <div class="mt-24! text-black dark:text-white">
+    <div id="waline"></div>
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@3/dist/waline.css" />
+    <script type="module">
+      import { init } from 'https://unpkg.com/@waline/client@3/dist/waline.mjs';
+      init({
+        el: '#waline',
+        serverURL: 'https://waline.vercel.app',
+        path: '{{ .RelPermalink }}',
+        lang: 'zh-CN',
+        dark: 'auto',
+        meta: ['nick', 'mail', 'link'],
+        requiredMeta: ['nick'],
+        placeholder: '文明发言，理性交流～',
+        emoji: ['https://cdn.jsdelivr.net/npm/@waline/emojis/qq'],
+      });
+    </script>
+  </div>
+  {{- end -}}
+
   <!-- Post Tags -->
   {{- if .Params.tags -}}
   <footer class="mt-12 flex flex-wrap">
