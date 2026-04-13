@@ -98,3 +98,8 @@ weight = 4
 name = "关于"
 url = "/about/"
 weight = 5
+
+[[menu.main]]
+  name = "友链"
+  url = "/links/"
+  weight = 5
