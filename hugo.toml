@@ -1,4 +1,3 @@
-# 核心修复：baseURL末尾必须加 /
 baseURL = "https://ayublog-github-io.vercel.app/"
 languageCode = "zh-CN"
 title = "钰de个人博客"
@@ -6,6 +5,8 @@ theme = "hugo-paper-main"
 relativeURLs = false
 canonifyURLs = true
 enableRobotsTXT = true
+themesDir = "themes"
+staticDir = "static"
 
 [taxonomies]
 tag = "tags"
