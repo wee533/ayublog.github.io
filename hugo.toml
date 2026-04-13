@@ -1,10 +1,12 @@
-baseURL = "https://ayublog.vercel.app/"
+baseURL = "https://ayublog-github-io.vercel.app/"
 languageCode = "zh-CN"
 title = "钰de个人博客"
 theme = "hugo-paper-main"
-relativeURLs = false
-canonifyURLs = true
+relativeURLs = true
+canonifyURLs = false
 enableRobotsTXT = true
+assetDir = "assets"
+publishDir = "public"
 
 [taxonomies]
 tag = "tags"
