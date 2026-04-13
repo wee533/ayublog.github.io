@@ -5,20 +5,16 @@ theme = "hugo-paper-main"
 relativeURLs = false
 canonifyURLs = true
 enableRobotsTXT = true
+
 [taxonomies]
 tag = "tags"
 category = "categories"
 
-# ==============================================
-# 🔥 唯一的根 Params 配置（所有参数都合并在这里，绝不重复！）
-# ==============================================
 [params]
-# 基础设置
 theme = "light"
 subtitle = "欢迎来到我的 Hugo 博客"
 copyright = "© 2026 钰的个人博客"
 
-# 首页功能
 show_summary = true
 show_reading_time = true
 show_tags = true
@@ -26,26 +22,21 @@ show_categories = true
 paginate = 5
 pinned = true
 
-# 配色
 primary_color = "#6366f1"
 background_color = "#fafafa"
 text_color = "#333333"
 link_color = "#6366f1"
 dark_mode = true
 
-
-# 搜索
 [params.search]
 enable = true
 type = "local"
 
-# 目录
 [params.toc]
 enable = true
 depth = 3
 mobile_collapse = true
 
-# 页脚
 [params.footer]
 show_visitor = false
 powered_by = false
@@ -53,7 +44,6 @@ social = [
   { name = "GitHub", url = "https://github.com/wee533", icon = "github" }
 ]
 
-# Umami 统计（只埋点，不显示UI）
 [params.analytics.umami]
 enable = true
 website_id = "913c1097-863d-43b7-9b47-e0fd9807aab0"
@@ -62,17 +52,6 @@ host_url = "https://cloud.umami.is"
 auto_track = true
 do_not_track = false
 
-# 评论
-[params.comment.utterances]
-enable = true
-repo = "wee533/ayublog.github.io"
-issueTerm = "pathname"
-theme = "github-light"
-label = "blog-comment"
-
-# ==============================================
-# 导航栏
-# ==============================================
 [menu]
 [[menu.main]]
 name = "首页"
