@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo on 钰de个人博客</title>
-    <link>https://ayublogisok.netlify.app/tags/hugo/</link>
+    <link>http://localhost:1313/tags/hugo/</link>
     <description>Recent content in Hugo on 钰de个人博客</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 12 Apr 2026 16:00:00 +0800</lastBuildDate>
-    <atom:link href="https://ayublogisok.netlify.app/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>我的 Hugo 博客搭建全记录：从踩坑到胜利的完整复盘</title>
-      <link>https://ayublogisok.netlify.app/posts/hugo-build-journey/</link>
+      <link>http://localhost:1313/posts/hugo-build-journey/</link>
       <pubDate>Sun, 12 Apr 2026 16:00:00 +0800</pubDate>
-      <guid>https://ayublogisok.netlify.app/posts/hugo-build-journey/</guid>
+      <guid>http://localhost:1313/posts/hugo-build-journey/</guid>
       <description>&lt;h2 id=&#34;-写在前面&#34;&gt;🎉 写在前面&lt;/h2&gt;&#xA;&lt;p&gt;终于！在经历了无数次报错、404、样式全崩、Git 冲突之后，我的个人博客终于完整跑通了！从最开始的「本地裸奔、线上404」，到现在主题正常、评论系统上线，这一路真的太坎坷了，索性把所有坑都记录下来，给同样新手的朋友做个参考，也给自己留个纪念✨&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-搭建背景&#34;&gt;🚀 搭建背景&lt;/h2&gt;&#xA;&lt;p&gt;作为一个刚入门的前端/技术爱好者，一直想拥有一个完全属于自己的个人博客，用来记录学习、生活和技术成长。对比了很多方案后，最终选择了 &lt;strong&gt;Hugo + GitHub Pages&lt;/strong&gt; 组合：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;完全免费，用 GitHub 托管，不用买服务器&lt;/li&gt;&#xA;&lt;li&gt;生成速度极快，静态页面访问流畅&lt;/li&gt;&#xA;&lt;li&gt;主题生态丰富，高度可定制化&lt;/li&gt;&#xA;&lt;li&gt;用 Markdown 写文章，简单高效&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;本以为是「一键部署」的轻松活，没想到直接踩满了所有新手坑…&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-全程踩坑记录血泪史&#34;&gt;🚨 全程踩坑记录（血泪史）&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1--第一坑主题样式全崩本地线上全是裸奔页面&#34;&gt;1.  第一坑：主题样式全崩，本地/线上全是「裸奔」页面&lt;/h3&gt;&#xA;&lt;p&gt;最开始用了 Paper 主题，结果本地打开就是纯文字、蓝色超链接，完全没有任何样式，相当于只渲染了 HTML 骨架，没穿「衣服」。&#xA;&lt;strong&gt;原因&lt;/strong&gt;：主题配置错误 + 样式文件损坏 + 浏览器缓存三重干扰&#xA;&lt;strong&gt;解决&lt;/strong&gt;：果断换成成熟的 Moments 主题，彻底删除旧主题，强制切换主题配置，全链路清缓存，终于样式正常。&lt;/p&gt;&#xA;&lt;h3 id=&#34;2--第二坑git-推送失败远程仓库冲突&#34;&gt;2.  第二坑：Git 推送失败，远程仓库冲突&lt;/h3&gt;&#xA;&lt;p&gt;改完配置准备推送到 GitHub，结果直接报错：&lt;code&gt;Updates were rejected because the remote contains work that you do not have locally&lt;/code&gt;&#xA;&lt;strong&gt;原因&lt;/strong&gt;：在 GitHub 网页上删文件、改配置，直接修改了远程仓库，本地没同步，导致提交记录不一致&#xA;&lt;strong&gt;解决&lt;/strong&gt;：用 &lt;code&gt;git pull origin main --rebase&lt;/code&gt; 同步远程更新，再执行推送，完美解决冲突。&lt;/p&gt;&#xA;&lt;h3 id=&#34;3--第三坑github-actions-部署卡壳本地404&#34;&gt;3.  第三坑：GitHub Actions 部署卡壳，本地404&lt;/h3&gt;&#xA;&lt;p&gt;线上部署成功了，结果本地直接 404 Not Found，线上正常本地崩&#xA;&lt;strong&gt;原因&lt;/strong&gt;：首页 &lt;code&gt;_index.md&lt;/code&gt; 文件缺失/格式错误，Hugo 找不到首页文件&#xA;&lt;strong&gt;解决&lt;/strong&gt;：补全正确的首页 Front Matter，用 &lt;code&gt;hugo --gc&lt;/code&gt; 强制清缓存，重新构建，404 直接消失。&lt;/p&gt;</description>
     </item>
     <item>
       <title>我的第一篇 Hugo 博客文章 🎉</title>
-      <link>https://ayublogisok.netlify.app/posts/articles01/</link>
+      <link>http://localhost:1313/posts/articles01/</link>
       <pubDate>Sat, 11 Apr 2026 22:50:00 +0800</pubDate>
-      <guid>https://ayublogisok.netlify.app/posts/articles01/</guid>
+      <guid>http://localhost:1313/posts/articles01/</guid>
       <description>&lt;p&gt;哈喽！这是我用 Hugo + Moments 主题搭建的个人博客，终于成功跑起来啦 🎊&lt;/p&gt;&#xA;&lt;h2 id=&#34;-搭建过程回顾&#34;&gt;🚀 搭建过程回顾&lt;/h2&gt;&#xA;&lt;p&gt;从最开始的 &lt;code&gt;Page not found&lt;/code&gt; 报错，到端口占用、样式加载失败，再到主题文件缺失，一路踩了超多坑，终于把博客完整跑通了。&lt;/p&gt;&#xA;&lt;h3 id=&#34;-核心踩坑记录&#34;&gt;🔧 核心踩坑记录&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;主题名不匹配&lt;/strong&gt;：&lt;code&gt;hugo.toml&lt;/code&gt; 里的 &lt;code&gt;theme&lt;/code&gt; 必须和 &lt;code&gt;themes&lt;/code&gt; 文件夹名完全一致，差一个字符都不行&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;静态资源缺失&lt;/strong&gt;：主题文件夹里必须有 &lt;code&gt;assets&lt;/code&gt;、&lt;code&gt;static&lt;/code&gt;、&lt;code&gt;layouts&lt;/code&gt; 三个核心目录，否则样式直接白屏&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;端口占用问题&lt;/strong&gt;：多次启动服务后，后台残留进程占用 1313 端口，需要手动杀进程&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;缓存干扰&lt;/strong&gt;：&lt;code&gt;public&lt;/code&gt; 和 &lt;code&gt;resources&lt;/code&gt; 文件夹的旧缓存会导致新配置不生效，必须定期清理&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;-moments-主题体验&#34;&gt;✨ Moments 主题体验&lt;/h2&gt;&#xA;&lt;p&gt;Moments 主题真的太适合个人博客了！&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;简洁干净的几何风设计，视觉效果拉满&lt;/li&gt;&#xA;&lt;li&gt;响应式布局，手机端也能完美适配&lt;/li&gt;&#xA;&lt;li&gt;支持明暗主题切换，细节感拉满&lt;/li&gt;&#xA;&lt;li&gt;加载速度快，没有冗余功能&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-后续计划&#34;&gt;📌 后续计划&lt;/h2&gt;&#xA;&lt;p&gt;接下来打算给博客做这些优化：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;配置评论系统，方便和大家交流&lt;/li&gt;&#xA;&lt;li&gt;添加访客统计，看看谁来逛我的博客&lt;/li&gt;&#xA;&lt;li&gt;部署到 GitHub Pages，让全世界都能访问&lt;/li&gt;&#xA;&lt;li&gt;持续更新技术笔记、生活日常，把这里当成自己的小天地&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这篇文章会自动显示在博客的文章列表里，刷新 &lt;code&gt;localhost:1313&lt;/code&gt; 就能看到啦！&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
     </item>
   </channel>

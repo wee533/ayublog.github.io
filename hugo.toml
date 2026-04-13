@@ -1,7 +1,9 @@
+# 核心修复：baseURL必须和Vercel域名完全一致！
 baseURL = "https://ayublog-github-io.vercel.app/"
 languageCode = "zh-CN"
 title = "钰de个人博客"
 theme = "hugo-paper-main"
+# 关键修复：开启相对URL，关闭canonify，彻底杜绝绝对域名硬编码
 relativeURLs = true
 canonifyURLs = false
 enableRobotsTXT = true
