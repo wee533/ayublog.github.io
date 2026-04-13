@@ -20,25 +20,6 @@
 
   <section>{{- .Content -}}</section>
 
-  <!-- 游客可评论 · 不乱码 Waline -->
-  <div class="mt-24">
-    <div id="waline" style="padding: 1rem; border-radius: 0.75rem;"></div>
-  </div>
-
-  <script type="module">
-    import { init } from 'https://unpkg.com/@waline/client@3/dist/waline.mjs';
-    init({
-      el: '#waline',
-      serverURL: 'https://waline.vercel.app',
-      path: window.location.pathname,
-      lang: 'zh-CN',
-      dark: 'auto',
-      emoji: false
-    });
-  </script>
-
-  <link rel="stylesheet" href="https://unpkg.com/@waline/client@3/dist/waline.css">
-
   <!-- Post Tags -->
   {{- if .Params.tags -}}
   <footer class="mt-12 flex flex-wrap">
