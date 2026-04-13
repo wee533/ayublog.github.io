@@ -59,22 +59,18 @@ do_not_track = false
 name = "首页"
 url = "/"
 weight = 1
-
 [[menu.main]]
 name = "文章"
 url = "/posts/"
 weight = 2
-
 [[menu.main]]
 name = "归档"
 url = "/archives/"
 weight = 3
-
 [[menu.main]]
 name = "标签"
 url = "/tags/"
 weight = 4
-
 [[menu.main]]
 name = "关于"
 url = "/about/"
