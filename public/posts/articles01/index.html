@@ -1,83 +1,230 @@
-baseURL = "https://ayublog-github-io.vercel.app/"
-languageCode = "zh-CN"
-title = "钰de个人博客"
-theme = "hugo-paper-main"
-# 关键修复：关闭relativeURLs，恢复绝对路径，让CSS正常加载
-relativeURLs = false
-canonifyURLs = true
-enableRobotsTXT = true
-assetDir = "assets"
-publishDir = "public"
+<!doctype html>
 
-[taxonomies]
-tag = "tags"
-category = "categories"
 
-[params]
-theme = "light"
-subtitle = "欢迎来到我的 Hugo 博客"
-copyright = "© 2026 钰的个人博客"
 
-show_summary = true
-show_reading_time = true
-show_tags = true
-show_categories = true
-paginate = 5
-pinned = true
 
-primary_color = "#6366f1"
-background_color = "#fafafa"
-# 修复文字颜色，避免纯白看不见
-text_color = "#333333"
-link_color = "#6366f1"
-dark_mode = true
 
-[params.search]
-enable = true
-type = "local"
 
-[params.toc]
-enable = true
-depth = 3
-mobile_collapse = true
 
-[params.footer]
-show_visitor = false
-powered_by = false
-social = [
-  { name = "GitHub", url = "https://github.com/wee533", icon = "github" }
-]
+<html
+  class="not-ready lg:text-base"
+  style="--bg:#faf8f1"
+  lang="zh-CN"
+  dir="ltr"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=56323&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
 
-[params.analytics.umami]
-enable = true
-website_id = "913c1097-863d-43b7-9b47-e0fd9807aab0"
-src = "https://cloud.umami.is/script.js"
-host_url = "https://cloud.umami.is"
-auto_track = true
-do_not_track = false
+  
+  <title>我的第一篇 Hugo 博客文章 🎉 - 钰de个人博客</title>
 
-[menu]
-[[menu.main]]
-name = "首页"
-url = "/"
-weight = 1
+  
+  <meta name="theme-color" />
 
-[[menu.main]]
-name = "文章"
-url = "/posts/"
-weight = 2
+  <meta name="description" content="哈喽！这是我用 Hugo &#43; Moments 主题搭建的个人博客，终于成功跑起来啦 🎊
+🚀 搭建过程回顾
+从最开始的 Page not found 报错，到端口占用、样式加载失败，再到主题文件缺失，一路踩了超多坑，终于把博客完整跑通了。
+🔧 核心踩坑记录
 
-[[menu.main]]
-name = "归档"
-url = "/archives/"
-weight = 3
+主题名不匹配：hugo.toml 里的 theme 必须和 themes 文件夹名完全一致，差一个字符都不行
+静态资源缺失：主题文件夹里必须有 assets、static、layouts 三个核心目录，否则样式直接白屏
+端口占用问题：多次启动服务后，后台残留进程占用 1313 端口，需要手动杀进程
+缓存干扰：public 和 resources 文件夹的旧缓存会导致新配置不生效，必须定期清理
 
-[[menu.main]]
-name = "标签"
-url = "/tags/"
-weight = 4
+✨ Moments 主题体验
+Moments 主题真的太适合个人博客了！
 
-[[menu.main]]
-name = "关于"
-url = "/about/"
-weight = 5
+简洁干净的几何风设计，视觉效果拉满
+响应式布局，手机端也能完美适配
+支持明暗主题切换，细节感拉满
+加载速度快，没有冗余功能
+
+📌 后续计划
+接下来打算给博客做这些优化：
+
+配置评论系统，方便和大家交流
+添加访客统计，看看谁来逛我的博客
+部署到 GitHub Pages，让全世界都能访问
+持续更新技术笔记、生活日常，把这里当成自己的小天地
+
+
+
+这篇文章会自动显示在博客的文章列表里，刷新 localhost:1313 就能看到啦！
+" />
+  <meta name="author" content="啊钰" /><link rel="preload stylesheet" as="style" href="http://localhost:56323/main.min.5386ecd394e7be7afd2e16a99946702b0eaae87b08f0f3957aaaa3e6b593a037.css" integrity="sha256-U4bs05Tnvnr9LhapmUZwKw6q6HsI8POVeqqj5rWToDc=" />
+
+  
+  <link rel="preload" as="image" href="http://localhost:56323/theme.png" />
+
+  
+
+  
+
+  <script
+    defer
+    src="http://localhost:56323/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad()"
+  ></script>
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:56323/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:56323/apple-touch-icon.png"
+  />
+
+  <meta name="generator" content="Hugo 0.159.2">
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="913c1097-863d-43b7-9b47-e0fd9807aab0"></script>
+</head><body
+    class="bg-(--bg) text-black antialiased duration-200 ease-out [-webkit-tap-highlight-color:transparent] dark:text-white"
+  ><header
+  class="mx-auto flex h-[4.5rem] max-w-(--w) px-8 whitespace-nowrap lg:justify-center"
+>
+  <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
+    <a
+      class="-translate-y-[1px] text-2xl font-medium"
+      href="http://localhost:56323/"
+      >钰de个人博客</a
+    >
+    <div
+      class="btn-dark text-[0px] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden ltr:-mr-8 rtl:-ml-8"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? "rgb(0 0 0 / 85%)" : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full flex-col justify-center bg-(--bg) pb-16 duration-200 select-none lg:static lg:h-auto lg:flex-row lg:bg-transparent! lg:pb-0 lg:transition-none"
+  ><nav
+      class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse"
+    ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../"
+        >首页</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../posts/"
+        >文章</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../archives/"
+        >归档</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../tags/"
+        >标签</a
+      ><a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="../../about/"
+        >关于</a
+      ></nav>
+  </div>
+</header>
+<main
+      class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
+    >
+<main class="prose prose-neutral dark:prose-invert relative mx-auto px-4 py-8 max-w-2xl">
+  <h1 class="mb-4 text-3xl font-bold">我的第一篇 Hugo 博客文章 🎉</h1>
+  <div class="content">
+    <p>哈喽！这是我用 Hugo + Moments 主题搭建的个人博客，终于成功跑起来啦 🎊</p>
+<h2 id="-搭建过程回顾">🚀 搭建过程回顾</h2>
+<p>从最开始的 <code>Page not found</code> 报错，到端口占用、样式加载失败，再到主题文件缺失，一路踩了超多坑，终于把博客完整跑通了。</p>
+<h3 id="-核心踩坑记录">🔧 核心踩坑记录</h3>
+<ol>
+<li><strong>主题名不匹配</strong>：<code>hugo.toml</code> 里的 <code>theme</code> 必须和 <code>themes</code> 文件夹名完全一致，差一个字符都不行</li>
+<li><strong>静态资源缺失</strong>：主题文件夹里必须有 <code>assets</code>、<code>static</code>、<code>layouts</code> 三个核心目录，否则样式直接白屏</li>
+<li><strong>端口占用问题</strong>：多次启动服务后，后台残留进程占用 1313 端口，需要手动杀进程</li>
+<li><strong>缓存干扰</strong>：<code>public</code> 和 <code>resources</code> 文件夹的旧缓存会导致新配置不生效，必须定期清理</li>
+</ol>
+<h2 id="-moments-主题体验">✨ Moments 主题体验</h2>
+<p>Moments 主题真的太适合个人博客了！</p>
+<ul>
+<li>简洁干净的几何风设计，视觉效果拉满</li>
+<li>响应式布局，手机端也能完美适配</li>
+<li>支持明暗主题切换，细节感拉满</li>
+<li>加载速度快，没有冗余功能</li>
+</ul>
+<h2 id="-后续计划">📌 后续计划</h2>
+<p>接下来打算给博客做这些优化：</p>
+<ul>
+<li>配置评论系统，方便和大家交流</li>
+<li>添加访客统计，看看谁来逛我的博客</li>
+<li>部署到 GitHub Pages，让全世界都能访问</li>
+<li>持续更新技术笔记、生活日常，把这里当成自己的小天地</li>
+</ul>
+<hr>
+<blockquote>
+<p>这篇文章会自动显示在博客的文章列表里，刷新 <code>localhost:1313</code> 就能看到啦！</p>
+</blockquote>
+
+  </div>
+</main>
+</main><footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+  <div class="mr-auto">&copy;2026
+    <a class="link" href="http://localhost:56323/">钰de个人博客</a></div>
+  <footer
+  class="mx-auto flex h-[4.5rem] max-w-(--w) items-center justify-center px-8 text-xs tracking-wider uppercase opacity-60"
+>
+</script>
+</footer>
+</body>
+</html>
