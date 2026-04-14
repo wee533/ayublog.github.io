@@ -49,7 +49,7 @@ social = [
 
 [params.analytics.umami]
 enable = true
-website_id = "913c1097-863d-43b7-9b47-e0fd9807aab0"
+website_id = "28e01c67-12a4-41df-bac5-5ebbfc3198bb"
 src = "https://cloud.umami.is/script.js"
 host_url = "https://cloud.umami.is"
 auto_track = true
