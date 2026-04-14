@@ -2,11 +2,14 @@ baseURL = "https://ayublog-github-io.vercel.app/"
 languageCode = "zh-CN"
 title = "钰de个人博客"
 theme = "hugo-paper-main"
+
+# 关键调整：关闭可能干扰 assets pipeline 的选项
 relativeURLs = false
-canonifyURLs = true
+canonifyURLs = false
+
 enableRobotsTXT = true
+
 themesDir = "themes"
-staticDir = "static"
 
 [taxonomies]
 tag = "tags"
@@ -22,7 +25,6 @@ show_reading_time = true
 show_tags = true
 show_categories = true
 paginate = 5
-pinned = true
 
 primary_color = "#6366f1"
 background_color = "#fafafa"
@@ -37,7 +39,6 @@ type = "local"
 [params.toc]
 enable = true
 depth = 3
-mobile_collapse = true
 
 [params.footer]
 show_visitor = false
