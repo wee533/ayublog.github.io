@@ -1,2 +1,57 @@
-/* Place custom css here. */
-@reference './app.css';
+/* 移动端基础优化 */
+html, body {
+  overflow-x: hidden;
+}
+
+/* 文章容器内边距适配手机 */
+@media (max-width: 768px) {
+  .wrapper {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* 标题字号缩小 */
+  h1 {
+    font-size: 1.8rem !important;
+  }
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  h3 {
+    font-size: 1.3rem !important;
+  }
+
+  /* 文章正文行高与间距 */
+  .post-content p,
+  .post-content li {
+    line-height: 1.7 !important;
+    margin-bottom: 0.9em !important;
+  }
+
+  /* 代码块移动端适配 */
+  pre, code {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* 图片宽度100%，不超出屏幕 */
+  .post-content img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 6px !important;
+  }
+
+  /* 底部与导航间距 */
+  footer, .menu {
+    padding: 1rem 0 !important;
+  }
+}
+
+/* 中等屏幕平板优化 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .wrapper {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
