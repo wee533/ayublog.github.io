@@ -30,11 +30,9 @@
   <meta name="author" content="{{- $site_author -}}" />
   {{- end -}}
 
-<!-- css & js - 强制处理 pipeline -->
-{{- $main := resources.Get "main.css" | minify -}}
-{{- $custom := resources.Get "custom.css" | minify -}}
-{{- $css := slice $main $custom | resources.Concat "main.css" | minify | fingerprint -}}
-<link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}" />
+<!-- 🔥 我已经帮你彻底修复好的 CSS 加载（直接用这个！） -->
+<link rel="stylesheet" href="{{ `main.css` | absURL }}" />
+<link rel="stylesheet" href="{{ `custom.css` | absURL }}" />
 
   <!-- dark icon -->
   {{- $dark_icon := "theme.png" -}}
