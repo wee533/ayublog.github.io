@@ -16,6 +16,13 @@
       <description>&lt;p&gt;今天在抖音听来一个新词“友客之道”，核心是付出应该基于给双方都能带来愉悦，自己有怨气或者对方抗拒就应该停止或者改变方式&lt;/p&gt;&#xA;&lt;p&gt;我的朋友古猫宁也说过一句很道理的话，“别人对你好尊重你是因为人本身就是一个特别好的人，而不是因为你是一个很好的人”&lt;/p&gt;&#xA;&lt;p&gt;因此，我觉得友客之道还要加上一个限定条件，付出要给值得的人，能接得住你的善意的人&#xA;我特别记得大学新生报到那天，我爸妈送我去上大学，在车上偶遇了一个女同学，当天请了她一百多的东西，往返也是我们这边打的车，要知道玉林这边的薪资水平也就是三千多左右，相当于我们一家人拿出一天多的收入招待她，可是她，从头到尾都没有跟我们一家人说过一句谢谢&amp;hellip;后来的事更不用说了&amp;hellip;我不喜欢这种人，我觉得无法善待别人的好意是一种人格障碍&lt;/p&gt;</description>
     </item>
     <item>
+      <title>友客之道</title>
+      <link>http://localhost:1313/youke-zhidao/</link>
+      <pubDate>Sat, 18 Apr 2026 17:59:00 +0800</pubDate>
+      <guid>http://localhost:1313/youke-zhidao/</guid>
+      <description>&lt;p&gt;今天在抖音听来一个新词“友客之道”，核心是付出应该基于给双方都能带来愉悦，自己有怨气或者对方抗拒就应该停止或者改变方式&lt;/p&gt;&#xA;&lt;p&gt;我的朋友古猫宁也说过一句很道理的话，“别人对你好尊重你是因为人本身就是一个特别好的人，而不是因为你是一个很好的人”&lt;/p&gt;&#xA;&lt;p&gt;因此，我觉得友客之道还要加上一个限定条件，付出要给值得的人，能接得住你的善意的人&#xA;我特别记得大学新生报到那天，我爸妈送我去上大学，在车上偶遇了一个女同学，当天请了她一百多的东西，往返也是我们这边打的车，要知道玉林这边的薪资水平也就是三千多左右，相当于我们一家人拿出一天多的收入招待她，可是她，从头到尾都没有跟我们一家人说过一句谢谢&amp;hellip;后来的事更不用说了&amp;hellip;我不喜欢这种人，我觉得无法善待别人的好意是一种人格障碍&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>我的 Hugo 博客搭建实录 - 终案</title>
       <link>http://localhost:1313/posts/end/</link>
       <pubDate>Wed, 15 Apr 2026 18:00:00 +0000</pubDate>
@@ -49,13 +56,6 @@
       <pubDate>Sat, 11 Apr 2026 22:50:00 +0800</pubDate>
       <guid>http://localhost:1313/posts/articles01/</guid>
       <description>&lt;p&gt;哈喽！这是我用 Hugo + Moments 主题搭建的个人博客，终于成功跑起来啦 🎊&lt;/p&gt;&#xA;&lt;h2 id=&#34;-搭建过程回顾&#34;&gt;🚀 搭建过程回顾&lt;/h2&gt;&#xA;&lt;p&gt;从最开始的 &lt;code&gt;Page not found&lt;/code&gt; 报错，到端口占用、样式加载失败，再到主题文件缺失，一路踩了超多坑，终于把博客完整跑通了。&lt;/p&gt;&#xA;&lt;h3 id=&#34;-核心踩坑记录&#34;&gt;🔧 核心踩坑记录&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;主题名不匹配&lt;/strong&gt;：&lt;code&gt;hugo.toml&lt;/code&gt; 里的 &lt;code&gt;theme&lt;/code&gt; 必须和 &lt;code&gt;themes&lt;/code&gt; 文件夹名完全一致，差一个字符都不行&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;静态资源缺失&lt;/strong&gt;：主题文件夹里必须有 &lt;code&gt;assets&lt;/code&gt;、&lt;code&gt;static&lt;/code&gt;、&lt;code&gt;layouts&lt;/code&gt; 三个核心目录，否则样式直接白屏&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;端口占用问题&lt;/strong&gt;：多次启动服务后，后台残留进程占用 1313 端口，需要手动杀进程&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;缓存干扰&lt;/strong&gt;：&lt;code&gt;public&lt;/code&gt; 和 &lt;code&gt;resources&lt;/code&gt; 文件夹的旧缓存会导致新配置不生效，必须定期清理&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;-moments-主题体验&#34;&gt;✨ Moments 主题体验&lt;/h2&gt;&#xA;&lt;p&gt;Moments 主题真的太适合个人博客了！&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;简洁干净的几何风设计，视觉效果拉满&lt;/li&gt;&#xA;&lt;li&gt;响应式布局，手机端也能完美适配&lt;/li&gt;&#xA;&lt;li&gt;支持明暗主题切换，细节感拉满&lt;/li&gt;&#xA;&lt;li&gt;加载速度快，没有冗余功能&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-后续计划&#34;&gt;📌 后续计划&lt;/h2&gt;&#xA;&lt;p&gt;接下来打算给博客做这些优化：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;配置评论系统，方便和大家交流&lt;/li&gt;&#xA;&lt;li&gt;添加访客统计，看看谁来逛我的博客&lt;/li&gt;&#xA;&lt;li&gt;部署到 GitHub Pages，让全世界都能访问&lt;/li&gt;&#xA;&lt;li&gt;持续更新技术笔记、生活日常，把这里当成自己的小天地&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;这篇文章会自动显示在博客的文章列表里，刷新 &lt;code&gt;localhost:1313&lt;/code&gt; 就能看到啦！&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
-    </item>
-    <item>
-      <title></title>
-      <link>http://localhost:1313/youke-zhidao/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/youke-zhidao/</guid>
-      <description>&lt;h1 id=&#34;友客之道&#34;&gt;友客之道&lt;/h1&gt;&#xA;&lt;p&gt;今天在抖音听来一个新词「友客之道」，核心是：&#xA;付出应该基于给双方都能带来愉悦，自己有怨气或者对方抗拒，就应该停止或者改变方式。&lt;/p&gt;&#xA;&lt;p&gt;我的朋友古猫宁也说过一句很戳人的话：&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;别人对你好、尊重你，是因为人本身就是一个特别好的人，而不是因为你是一个很好的人。&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;因此，我觉得「友客之道」还要加上一个限定条件：&#xA;&lt;strong&gt;付出要给值得的人，给能接得住你善意的人。&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;我特别记得大学新生报到那天，我爸妈送我去上大学，在车上偶遇了一个女同学。&#xA;当天我们请了她一百多的东西，往返也是我们这边打的车。&#xA;要知道玉林这边的薪资水平也就三千多左右，那相当于我们一家人拿出了一天多的收入招待她。&lt;/p&gt;&#xA;&lt;p&gt;可她，从头到尾都没有跟我们一家人说过一句谢谢……&#xA;后来的事更不用说了。&lt;/p&gt;&#xA;&lt;p&gt;我不喜欢这种人，我觉得无法善待别人的好意，是一种人格障碍。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
