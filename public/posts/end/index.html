@@ -11,7 +11,7 @@
   style="--bg:#faf8f1"
   lang="zh-CN"
   dir="ltr"
-><head>
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta
@@ -20,60 +20,184 @@
   />
 
   
-  <title> - 钰de个人博客</title>
+  <title>我的 Hugo 博客搭建实录 - 终案 - 钰de个人博客</title>
 
   
   <meta name="theme-color" />
 
-  <meta name="description" content="我的 Hugo 博客搭建实录-终案
-一、开篇：为什么选 Hugo？
+  <meta name="description" content="一、开篇：为什么选 Hugo？
 作为一个折腾党，选博客框架时，我直接把 Hexo、Jekyll、Hugo 全对比了一遍：
+
 Hexo：生态好，但 Node 版本坑多，本地构建慢，大项目容易崩
 Jekyll：Ruby 环境折腾，国内访问慢，对新手不友好
 Hugo：Go 语言写的，构建速度秒开，主题生态丰富，Paper 主题的极简风格直接戳中我，零犹豫选它。
+
 本以为是「5 分钟搭好博客」的快乐，结果一上手，直接掉进了连环坑。
+
 二、踩坑实录：那些让我崩溃的报错
 坑 1：public 文件夹死活推不上 GitHub
 最开始的问题，直接给我整懵了：本地 hugo 生成的 public 文件夹，里面 CSS、JS 全齐，一推 GitHub，就提示「nothing to commit」，死活传不上去。
-根源：Hugo 项目默认的 .gitignore 里，直接写了 /public，Git 直接把这个文件夹屏蔽了，你怎么 add 都没用。解决：
+根源：
+Hugo 项目默认的 .gitignore 里，直接写了 /public，Git 直接把这个文件夹屏蔽了，你怎么 add 都没用。
+解决：
+
 打开项目根目录的 .gitignore，把 /public 这一行删掉（或者加 # 注释掉）
 用强制添加命令，无视 .gitignore 提交：
-bash
-运行
+
 git add -f public
-git commit -m &ldquo;feat: 上传完整public文件夹&rdquo;
+git commit -m &#34;feat: 上传完整public文件夹&#34;
 坑 2：Git 推送超时，443 端口连不上
 好不容易解决了提交，一 git push，直接红屏报错：
 plaintext
-fatal: unable to access &lsquo;https://github.com/xxx/xxx.github.io.git/&#39;: Failed to connect to github.com port 443 after 21000 ms: Timed out
+fatal: unable to access &#39;https://github.com/xxx/xxx.github.io.git/&#39;: Failed to connect to github.com port 443 after 21000 ms: Timed out
 翻译成人话：网络超时，连不上 GitHub 服务器。
-这是国内搭 GitHub Pages 最常见的坑，根源就是网络环境（校园网 / 家用宽带）对 GitHub 的限制。解决方案（按优先级排序）：
+这是国内搭 GitHub Pages 最常见的坑。
+解决方案（按优先级排序）：
 最快见效：连手机热点，直接绕开网络限制，90% 的情况一次成功
-代理配置：给 Git 配置代理（替换成你自己的代理端口，默认 7890）
+代理配置：给 Git 配置代理（默认 7890）
 bash
 运行
-git config &ndash;global http.proxy http://127.0.0.1:7890
-git config &ndash;global https.proxy http://127.0.0.1:7890
-一劳永逸：换 SSH 协议，彻底告别 HTTPS 超时，后续单独出一篇详细教程
-终极兜底：网页直接上传，不用任何命令，直接在 GitHub 仓库拖文件上传，100% 成功
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+一劳永逸：换 SSH 协议
+终极兜底：GitHub 网页直接上传文件
 坑 3：CSS 全裸奔！页面变成浏览器默认样式
-这是最崩溃的一个坑：public 推上去了，打开博客，直接变成了「裸 HTML」—— 紫色下划线链接、无样式标签、排版全乱，完全是浏览器原生渲染，Paper 主题的米白背景、圆角样式全没了。
-排查过程（血泪史）：
-打开 Chrome 开发者工具（F12）→ Network → CSS 标签，发现完全没有 CSS 请求
-结论：浏览器根本没拿到 CSS 文件，HTML 里的  直接消失了
-根源：Paper 主题用了 Hugo Pipes 资源打包，要求 CSS 文件必须放在 /assets 文件夹，而我把 CSS 放在了 /static 文件夹里！Hugo 找不到 assets/main.css，直接跳过了整段 CSS 渲染代码，不生成任何  标签，页面自然裸奔。
-错误代码（原主题 head.html）：
+这是最崩溃的一个坑：public 推上去了，打开博客，直接变成了「裸 HTML」—— 紫色下划线链接、无样式标签、排版全乱。
+排查结论：浏览器根本没拿到 CSS 文件，HTML 里的 &lt;link&gt; 直接消失了。
+根源：Paper 主题用了 Hugo Pipes 资源打包，要求 CSS 文件必须放在 /assets 文件夹，而我把 CSS 放在了 /static 文件夹里！
+Hugo 找不到文件，直接不渲染 CSS 代码，连报错都没有。
+原主题错误代码：
 go
 运行
-{{- $main := resources.Get &ldquo;main.css&rdquo; | minify -}}
-{{- $custom := resources.Get &ldquo;custom.css&rdquo; | minify -}}
-{{- $css := slice $main $custom | resources.Concat &ldquo;main.css&rdquo; | minify | fingerprint -}}" />
-  <meta name="author" content="钰de个人博客" />
-<link rel="stylesheet" href="https://ayublog-github-io.vercel.app/main.css" />
-<link rel="stylesheet" href="https://ayublog-github-io.vercel.app/custom.css" />
+{{- $main := resources.Get &#34;main.css&#34; | minify -}}
+{{- $custom := resources.Get &#34;custom.css&#34; | minify -}}
+{{- $css := slice $main $custom | resources.Concat &#34;main.css&#34; | minify | fingerprint -}}
+&lt;link rel=&#34;stylesheet&#34; href=&#34;{{ $css.Permalink }}&#34; integrity=&#34;{{ $css.Data.Integrity }}&#34; /&gt;
+坑 4：Hugo Pipes 抽风，CSS 死活不生成
+就算把 CSS 放到 assets/，有时候还是会抽风：本地正常，一推 GitHub 样式又没了。
+根源就是环境不一致。
+三、终极解决方案：100% 生效的 CSS 修复
+折腾了整整一天，我终于找到了不管什么环境、100% 生效的 CSS 加载方案。
+第一步：彻底替换 head.html 里的 CSS 代码
+打开主题的 layouts/partials/head.html，把原来的代码替换成：
+html
+预览
+&lt;!-- 100% 生效的静态CSS加载，彻底绕开Hugo Pipes坑 --&gt;
+&lt;link rel=&#34;stylesheet&#34; href=&#34;{{ `main.css` | absURL }}&#34; /&gt;
+&lt;link rel=&#34;stylesheet&#34; href=&#34;{{ `custom.css` | absURL }}&#34; /&gt;
+第二步：把 CSS 放回 static 文件夹
+确保路径：
+plaintext
+项目根目录/
+├── static/
+│   ├── main.css
+│   └── custom.css
+第三步：本地重新构建 &#43; 强制推送
+bash
+运行
+# 彻底删除旧的public，清除缓存
+hugo --gc --minify --cleanDestinationDir
+
+# 强制提交public
+git add -f public
+git commit -m &#34;fix: 彻底修复CSS加载，恢复主题样式&#34;
+
+# 强制推送到GitHub
+git push -f origin main
+第四步：强制刷新浏览器
+打开博客，按：
+Ctrl &#43; Shift &#43; R（Windows）
+Cmd &#43; Shift &#43; R（Mac）
+样式立刻恢复正常！
+四、最终效果：完美运行的博客
+经过这一系列折腾，我的 Hugo 博客终于完美上线了：
+Paper 主题的米白背景、圆角标签、极简排版，完全正常
+导航栏、文章列表、标签页，样式丝滑
+本地、GitHub Pages 访问，CSS 100% 加载，再也不裸奔
+从最开始的连环报错，到最终的完美运行，这种从 0 到 1 搞定一个项目的成就感，真的太爽了。
+五、后续优化：让博客更丝滑
+1. 开启 GitHub Actions 自动部署
+彻底告别手动推 public，以后改完代码，只需要 git push，GitHub 自动帮你构建、部署，零操作。
+完整配置文件 .github/workflows/deploy.yml：
+yaml
+name: Deploy Hugo site to Pages
+
+on:
+  push:
+    branches: [&#34;main&#34;]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: &#34;pages&#34;
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: &#39;latest&#39;
+          extended: true
+
+      - name: Build
+        run: hugo --gc --minify --cleanDestinationDir
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+2. 接入 Cloudflare CDN
+给博客加速、加防护，国内访问秒开，还能免费申请 SSL 证书，让你的网址显示「绿色小锁」。
+3. 接入 Umami 访客统计
+替代 Google Analytics，国内可访问，隐私友好，零广告，完美适配 Hugo 博客。
+六、写在最后
+折腾 Hugo 博客的这几天，真的是「一边崩溃，一边自愈」。
+从最开始的「怎么推都推不上」，到「CSS 裸奔到怀疑人生」，再到最终的完美上线，每一个坑，都是成长的印记。
+如果你也在折腾 Hugo 博客，遇到了和我一样的问题，照着这篇文章走，绝对能少走 99% 的弯路。
+愿每一个折腾博客的人，都能拥有一个属于自己的、完美的小天地。
+plaintext
+
+---
+
+# 🚀 现在直接推送到 GitHub（复制这 4 行）
+
+```powershell
+hugo --gc --minify
+git add .
+git commit -m &#34;发布：我的Hugo博客搭建实录-终案&#34;
+git push -f origin main
+推完 强制刷新 就能看到啦！🎉
+" />
+  <meta name="author" content="啊钰" />
+<link rel="stylesheet" href="http://localhost:1313/main.css" />
+<link rel="stylesheet" href="http://localhost:1313/custom.css" />
 
   
-  <link rel="preload" as="image" href="https://ayublog-github-io.vercel.app/theme.png" />
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
 
   
 
@@ -81,36 +205,21 @@ go
 
   <script
     defer
-    src="https://ayublog-github-io.vercel.app/highlight.min.js"
+    src="http://localhost:1313/highlight.min.js"
     onload="hljs.initHighlightingOnLoad()"
   ></script>
 
   
   <link
     rel="icon"
-    href="https://ayublog-github-io.vercel.app/favicon.ico"
+    href="http://localhost:1313/favicon.ico"
   />
   <link
     rel="apple-touch-icon"
-    href="https://ayublog-github-io.vercel.app/apple-touch-icon.png"
+    href="http://localhost:1313/apple-touch-icon.png"
   />
 
   <meta name="generator" content="Hugo 0.159.2">
-  <meta itemprop="name" content="钰de个人博客">
-  <meta itemprop="description" content="我的 Hugo 博客搭建实录-终案 一、开篇：为什么选 Hugo？ 作为一个折腾党，选博客框架时，我直接把 Hexo、Jekyll、Hugo 全对比了一遍： Hexo：生态好，但 Node 版本坑多，本地构建慢，大项目容易崩 Jekyll：Ruby 环境折腾，国内访问慢，对新手不友好 Hugo：Go 语言写的，构建速度秒开，主题生态丰富，Paper 主题的极简风格直接戳中我，零犹豫选它。 本以为是「5 分钟搭好博客」的快乐，结果一上手，直接掉进了连环坑。 二、踩坑实录：那些让我崩溃的报错 坑 1：public 文件夹死活推不上 GitHub 最开始的问题，直接给我整懵了：本地 hugo 生成的 public 文件夹，里面 CSS、JS 全齐，一推 GitHub，就提示「nothing to commit」，死活传不上去。 根源：Hugo 项目默认的 .gitignore 里，直接写了 /public，Git 直接把这个文件夹屏蔽了，你怎么 add 都没用。解决： 打开项目根目录的 .gitignore，把 /public 这一行删掉（或者加 # 注释掉） 用强制添加命令，无视 .gitignore 提交： bash 运行 git add -f public git commit -m “feat: 上传完整public文件夹” 坑 2：Git 推送超时，443 端口连不上 好不容易解决了提交，一 git push，直接红屏报错： plaintext fatal: unable to access ‘https://github.com/xxx/xxx.github.io.git/&#39;: Failed to connect to github.com port 443 after 21000 ms: Timed out 翻译成人话：网络超时，连不上 GitHub 服务器。 这是国内搭 GitHub Pages 最常见的坑，根源就是网络环境（校园网 / 家用宽带）对 GitHub 的限制。解决方案（按优先级排序）： 最快见效：连手机热点，直接绕开网络限制，90% 的情况一次成功 代理配置：给 Git 配置代理（替换成你自己的代理端口，默认 7890） bash 运行 git config –global http.proxy http://127.0.0.1:7890 git config –global https.proxy http://127.0.0.1:7890 一劳永逸：换 SSH 协议，彻底告别 HTTPS 超时，后续单独出一篇详细教程 终极兜底：网页直接上传，不用任何命令，直接在 GitHub 仓库拖文件上传，100% 成功 坑 3：CSS 全裸奔！页面变成浏览器默认样式 这是最崩溃的一个坑：public 推上去了，打开博客，直接变成了「裸 HTML」—— 紫色下划线链接、无样式标签、排版全乱，完全是浏览器原生渲染，Paper 主题的米白背景、圆角样式全没了。 排查过程（血泪史）： 打开 Chrome 开发者工具（F12）→ Network → CSS 标签，发现完全没有 CSS 请求 结论：浏览器根本没拿到 CSS 文件，HTML 里的 直接消失了 根源：Paper 主题用了 Hugo Pipes 资源打包，要求 CSS 文件必须放在 /assets 文件夹，而我把 CSS 放在了 /static 文件夹里！Hugo 找不到 assets/main.css，直接跳过了整段 CSS 渲染代码，不生成任何 标签，页面自然裸奔。 错误代码（原主题 head.html）： go 运行 {{- $main := resources.Get “main.css” | minify -}} {{- $custom := resources.Get “custom.css” | minify -}} {{- $css := slice $main $custom | resources.Concat “main.css” | minify | fingerprint -}}">
-  <meta itemprop="wordCount" content="379"><meta property="og:url" content="https://ayublog-github-io.vercel.app/posts/end/">
-  <meta property="og:site_name" content="钰de个人博客">
-  <meta property="og:title" content="钰de个人博客">
-  <meta property="og:description" content="我的 Hugo 博客搭建实录-终案 一、开篇：为什么选 Hugo？ 作为一个折腾党，选博客框架时，我直接把 Hexo、Jekyll、Hugo 全对比了一遍： Hexo：生态好，但 Node 版本坑多，本地构建慢，大项目容易崩 Jekyll：Ruby 环境折腾，国内访问慢，对新手不友好 Hugo：Go 语言写的，构建速度秒开，主题生态丰富，Paper 主题的极简风格直接戳中我，零犹豫选它。 本以为是「5 分钟搭好博客」的快乐，结果一上手，直接掉进了连环坑。 二、踩坑实录：那些让我崩溃的报错 坑 1：public 文件夹死活推不上 GitHub 最开始的问题，直接给我整懵了：本地 hugo 生成的 public 文件夹，里面 CSS、JS 全齐，一推 GitHub，就提示「nothing to commit」，死活传不上去。 根源：Hugo 项目默认的 .gitignore 里，直接写了 /public，Git 直接把这个文件夹屏蔽了，你怎么 add 都没用。解决： 打开项目根目录的 .gitignore，把 /public 这一行删掉（或者加 # 注释掉） 用强制添加命令，无视 .gitignore 提交： bash 运行 git add -f public git commit -m “feat: 上传完整public文件夹” 坑 2：Git 推送超时，443 端口连不上 好不容易解决了提交，一 git push，直接红屏报错： plaintext fatal: unable to access ‘https://github.com/xxx/xxx.github.io.git/&#39;: Failed to connect to github.com port 443 after 21000 ms: Timed out 翻译成人话：网络超时，连不上 GitHub 服务器。 这是国内搭 GitHub Pages 最常见的坑，根源就是网络环境（校园网 / 家用宽带）对 GitHub 的限制。解决方案（按优先级排序）： 最快见效：连手机热点，直接绕开网络限制，90% 的情况一次成功 代理配置：给 Git 配置代理（替换成你自己的代理端口，默认 7890） bash 运行 git config –global http.proxy http://127.0.0.1:7890 git config –global https.proxy http://127.0.0.1:7890 一劳永逸：换 SSH 协议，彻底告别 HTTPS 超时，后续单独出一篇详细教程 终极兜底：网页直接上传，不用任何命令，直接在 GitHub 仓库拖文件上传，100% 成功 坑 3：CSS 全裸奔！页面变成浏览器默认样式 这是最崩溃的一个坑：public 推上去了，打开博客，直接变成了「裸 HTML」—— 紫色下划线链接、无样式标签、排版全乱，完全是浏览器原生渲染，Paper 主题的米白背景、圆角样式全没了。 排查过程（血泪史）： 打开 Chrome 开发者工具（F12）→ Network → CSS 标签，发现完全没有 CSS 请求 结论：浏览器根本没拿到 CSS 文件，HTML 里的 直接消失了 根源：Paper 主题用了 Hugo Pipes 资源打包，要求 CSS 文件必须放在 /assets 文件夹，而我把 CSS 放在了 /static 文件夹里！Hugo 找不到 assets/main.css，直接跳过了整段 CSS 渲染代码，不生成任何 标签，页面自然裸奔。 错误代码（原主题 head.html）： go 运行 {{- $main := resources.Get “main.css” | minify -}} {{- $custom := resources.Get “custom.css” | minify -}} {{- $css := slice $main $custom | resources.Concat “main.css” | minify | fingerprint -}}">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="钰de个人博客">
-  <meta name="twitter:description" content="我的 Hugo 博客搭建实录-终案 一、开篇：为什么选 Hugo？ 作为一个折腾党，选博客框架时，我直接把 Hexo、Jekyll、Hugo 全对比了一遍： Hexo：生态好，但 Node 版本坑多，本地构建慢，大项目容易崩 Jekyll：Ruby 环境折腾，国内访问慢，对新手不友好 Hugo：Go 语言写的，构建速度秒开，主题生态丰富，Paper 主题的极简风格直接戳中我，零犹豫选它。 本以为是「5 分钟搭好博客」的快乐，结果一上手，直接掉进了连环坑。 二、踩坑实录：那些让我崩溃的报错 坑 1：public 文件夹死活推不上 GitHub 最开始的问题，直接给我整懵了：本地 hugo 生成的 public 文件夹，里面 CSS、JS 全齐，一推 GitHub，就提示「nothing to commit」，死活传不上去。 根源：Hugo 项目默认的 .gitignore 里，直接写了 /public，Git 直接把这个文件夹屏蔽了，你怎么 add 都没用。解决： 打开项目根目录的 .gitignore，把 /public 这一行删掉（或者加 # 注释掉） 用强制添加命令，无视 .gitignore 提交： bash 运行 git add -f public git commit -m “feat: 上传完整public文件夹” 坑 2：Git 推送超时，443 端口连不上 好不容易解决了提交，一 git push，直接红屏报错： plaintext fatal: unable to access ‘https://github.com/xxx/xxx.github.io.git/&#39;: Failed to connect to github.com port 443 after 21000 ms: Timed out 翻译成人话：网络超时，连不上 GitHub 服务器。 这是国内搭 GitHub Pages 最常见的坑，根源就是网络环境（校园网 / 家用宽带）对 GitHub 的限制。解决方案（按优先级排序）： 最快见效：连手机热点，直接绕开网络限制，90% 的情况一次成功 代理配置：给 Git 配置代理（替换成你自己的代理端口，默认 7890） bash 运行 git config –global http.proxy http://127.0.0.1:7890 git config –global https.proxy http://127.0.0.1:7890 一劳永逸：换 SSH 协议，彻底告别 HTTPS 超时，后续单独出一篇详细教程 终极兜底：网页直接上传，不用任何命令，直接在 GitHub 仓库拖文件上传，100% 成功 坑 3：CSS 全裸奔！页面变成浏览器默认样式 这是最崩溃的一个坑：public 推上去了，打开博客，直接变成了「裸 HTML」—— 紫色下划线链接、无样式标签、排版全乱，完全是浏览器原生渲染，Paper 主题的米白背景、圆角样式全没了。 排查过程（血泪史）： 打开 Chrome 开发者工具（F12）→ Network → CSS 标签，发现完全没有 CSS 请求 结论：浏览器根本没拿到 CSS 文件，HTML 里的 直接消失了 根源：Paper 主题用了 Hugo Pipes 资源打包，要求 CSS 文件必须放在 /assets 文件夹，而我把 CSS 放在了 /static 文件夹里！Hugo 找不到 assets/main.css，直接跳过了整段 CSS 渲染代码，不生成任何 标签，页面自然裸奔。 错误代码（原主题 head.html）： go 运行 {{- $main := resources.Get “main.css” | minify -}} {{- $custom := resources.Get “custom.css” | minify -}} {{- $css := slice $main $custom | resources.Concat “main.css” | minify | fingerprint -}}">
-
-  <link rel="canonical" href="https://ayublog-github-io.vercel.app/posts/end/" />
 
 <script defer src="https://cloud.umami.is/script.js" data-website-id="28e01c67-12a4-41df-bac5-5ebbfc3198bb"></script>
 </head><body
@@ -121,7 +230,7 @@ go
   <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
     <a
       class="-translate-y-[1px] text-2xl font-medium"
-      href="https://ayublog-github-io.vercel.app/"
+      href="http://localhost:1313/"
       >钰de个人博客</a
     >
     <div
@@ -211,134 +320,182 @@ go
       class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
     >
 <main class="prose prose-neutral dark:prose-invert relative mx-auto px-4 py-8 max-w-2xl">
-  <h1 class="mb-4 text-3xl font-bold"></h1>
+  <h1 class="mb-4 text-3xl font-bold">我的 Hugo 博客搭建实录 - 终案</h1>
   <div class="content">
-    <p>我的 Hugo 博客搭建实录-终案
-一、开篇：为什么选 Hugo？
-作为一个折腾党，选博客框架时，我直接把 Hexo、Jekyll、Hugo 全对比了一遍：
-Hexo：生态好，但 Node 版本坑多，本地构建慢，大项目容易崩
-Jekyll：Ruby 环境折腾，国内访问慢，对新手不友好
-Hugo：Go 语言写的，构建速度秒开，主题生态丰富，Paper 主题的极简风格直接戳中我，零犹豫选它。
-本以为是「5 分钟搭好博客」的快乐，结果一上手，直接掉进了连环坑。
-二、踩坑实录：那些让我崩溃的报错
-坑 1：public 文件夹死活推不上 GitHub
-最开始的问题，直接给我整懵了：本地 hugo 生成的 public 文件夹，里面 CSS、JS 全齐，一推 GitHub，就提示「nothing to commit」，死活传不上去。
-根源：Hugo 项目默认的 .gitignore 里，直接写了 /public，Git 直接把这个文件夹屏蔽了，你怎么 add 都没用。解决：
-打开项目根目录的 .gitignore，把 /public 这一行删掉（或者加 # 注释掉）
-用强制添加命令，无视 .gitignore 提交：
-bash
-运行
-git add -f public
-git commit -m &ldquo;feat: 上传完整public文件夹&rdquo;
-坑 2：Git 推送超时，443 端口连不上
-好不容易解决了提交，一 git push，直接红屏报错：
-plaintext
-fatal: unable to access &lsquo;<a href="https://github.com/xxx/xxx.github.io.git/'">https://github.com/xxx/xxx.github.io.git/'</a>: Failed to connect to github.com port 443 after 21000 ms: Timed out
-翻译成人话：网络超时，连不上 GitHub 服务器。
-这是国内搭 GitHub Pages 最常见的坑，根源就是网络环境（校园网 / 家用宽带）对 GitHub 的限制。解决方案（按优先级排序）：
-最快见效：连手机热点，直接绕开网络限制，90% 的情况一次成功
-代理配置：给 Git 配置代理（替换成你自己的代理端口，默认 7890）
-bash
-运行
-git config &ndash;global http.proxy http://127.0.0.1:7890
-git config &ndash;global https.proxy http://127.0.0.1:7890
-一劳永逸：换 SSH 协议，彻底告别 HTTPS 超时，后续单独出一篇详细教程
-终极兜底：网页直接上传，不用任何命令，直接在 GitHub 仓库拖文件上传，100% 成功
-坑 3：CSS 全裸奔！页面变成浏览器默认样式
-这是最崩溃的一个坑：public 推上去了，打开博客，直接变成了「裸 HTML」—— 紫色下划线链接、无样式标签、排版全乱，完全是浏览器原生渲染，Paper 主题的米白背景、圆角样式全没了。
-排查过程（血泪史）：
-打开 Chrome 开发者工具（F12）→ Network → CSS 标签，发现完全没有 CSS 请求
-结论：浏览器根本没拿到 CSS 文件，HTML 里的 <!-- raw HTML omitted --> 直接消失了
-根源：Paper 主题用了 Hugo Pipes 资源打包，要求 CSS 文件必须放在 /assets 文件夹，而我把 CSS 放在了 /static 文件夹里！Hugo 找不到 assets/main.css，直接跳过了整段 CSS 渲染代码，不生成任何 <!-- raw HTML omitted --> 标签，页面自然裸奔。
-错误代码（原主题 head.html）：
-go
-运行
-{{- $main := resources.Get &ldquo;main.css&rdquo; | minify -}}
-{{- $custom := resources.Get &ldquo;custom.css&rdquo; | minify -}}
-{{- $css := slice $main $custom | resources.Concat &ldquo;main.css&rdquo; | minify | fingerprint -}}</p>
-<!-- raw HTML omitted -->
-<h1 id="强制提交public">强制提交public</h1>
-<p>git add -f public
-git commit -m &ldquo;fix: 彻底修复CSS加载，恢复主题样式&rdquo;</p>
-<h1 id="强制推送到github">强制推送到GitHub</h1>
-<p>git push -f origin main
-第四步：强制刷新浏览器
-打开博客，按 Ctrl + Shift + R（Windows）/ Cmd + Shift + R（Mac），强制清空缓存刷新，样式立刻恢复正常！
-四、最终效果：完美运行的博客
-经过这一系列折腾，我的 Hugo 博客终于完美上线了：
-Paper 主题的米白背景、圆角标签、极简排版，完全正常
-导航栏、文章列表、标签页，样式丝滑，没有任何错位
-本地、GitHub Pages 访问，CSS 100% 加载，再也不裸奔
-从最开始的连环报错，到最终的完美运行，这种从 0 到 1 搞定一个项目的成就感，真的太爽了。
-五、后续优化：让博客更丝滑
-博客搭好只是第一步，这些优化能让你的博客体验直接拉满：</p>
+    <h2 id="一开篇为什么选-hugo">一、开篇：为什么选 Hugo？</h2>
+<p>作为一个折腾党，选博客框架时，我直接把 Hexo、Jekyll、Hugo 全对比了一遍：</p>
+<ul>
+<li><strong>Hexo</strong>：生态好，但 Node 版本坑多，本地构建慢，大项目容易崩</li>
+<li><strong>Jekyll</strong>：Ruby 环境折腾，国内访问慢，对新手不友好</li>
+<li><strong>Hugo</strong>：Go 语言写的，构建速度秒开，主题生态丰富，Paper 主题的极简风格直接戳中我，零犹豫选它。</li>
+</ul>
+<p>本以为是「5 分钟搭好博客」的快乐，结果一上手，直接掉进了连环坑。</p>
+<hr>
+<h2 id="二踩坑实录那些让我崩溃的报错">二、踩坑实录：那些让我崩溃的报错</h2>
+<h3 id="坑-1public-文件夹死活推不上-github">坑 1：public 文件夹死活推不上 GitHub</h3>
+<p>最开始的问题，直接给我整懵了：本地 hugo 生成的 public 文件夹，里面 CSS、JS 全齐，一推 GitHub，就提示「nothing to commit」，死活传不上去。</p>
+<p><strong>根源</strong>：
+Hugo 项目默认的 <code>.gitignore</code> 里，直接写了 <code>/public</code>，Git 直接把这个文件夹屏蔽了，你怎么 add 都没用。</p>
+<p><strong>解决</strong>：</p>
 <ol>
-<li>开启 GitHub Actions 自动部署
-彻底告别手动推 public，以后改完代码，只需要 git push，GitHub 自动帮你构建、部署，零操作。完整配置文件（直接复制用）：在项目根目录新建 .github/workflows/deploy.yml：
-yaml
-name: Deploy Hugo site to Pages</li>
+<li>打开项目根目录的 <code>.gitignore</code>，把 <code>/public</code> 这一行删掉（或者加 <code>#</code> 注释掉）</li>
+<li>用强制添加命令，无视 <code>.gitignore</code> 提交：</li>
 </ol>
-<p>on:
-push:
-branches: [&ldquo;main&rdquo;]
-workflow_dispatch:</p>
-<p>permissions:
-contents: read
-pages: write
-id-token: write</p>
-<p>concurrency:
-group: &ldquo;pages&rdquo;
-cancel-in-progress: false</p>
-<p>jobs:
-build:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout
-uses: actions/checkout@v4
-with:
-submodules: true
-fetch-depth: 0</p>
-<pre><code>  - name: Setup Hugo
-    uses: peaceiris/actions-hugo@v2
-    with:
-      hugo-version: 'latest'
-      extended: true
-
-  - name: Build
-    run: hugo --gc --minify --cleanDestinationDir
-
-  - name: Upload artifact
-    uses: actions/upload-pages-artifact@v3
-    with:
-      path: ./public
-</code></pre>
-<p>deploy:
-environment:
-name: github-pages
-url: ${{ steps.deployment.outputs.page_url }}
-runs-on: ubuntu-latest
-needs: build
-steps:
-- name: Deploy to GitHub Pages
-id: deployment
-uses: actions/deploy-pages@v4
-2. 接入 Cloudflare CDN
-给博客加速、加防护，国内访问秒开，还能免费申请 SSL 证书，让你的网址显示「绿色小锁」，安全性拉满。
-3. 接入 Umami 访客统计
-替代 Google Analytics，国内可访问，隐私友好，零广告，完美适配 Hugo 博客，我已经直接集成到主题里了。
-六、写在最后
-折腾 Hugo 博客的这几天，真的是「一边崩溃，一边自愈」。从最开始的「怎么推都推不上」，到「CSS 裸奔到怀疑人生」，再到最终的完美上线，每一个坑，都是成长的印记。
-如果你也在折腾 Hugo 博客，遇到了和我一样的问题，照着这篇文章走，绝对能少走 99% 的弯路。如果有任何问题，欢迎在评论区留言，我会一一回复。
-愿每一个折腾博客的人，都能拥有一个属于自己的、完美的小天地。
-标签：#Hugo #博客搭建 #Paper 主题 #踩坑记录 #技术分享</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add -f public
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;feat: 上传完整public文件夹&#34;</span>
+</span></span><span style="display:flex;"><span>坑 2：Git 推送超时，443 端口连不上
+</span></span><span style="display:flex;"><span>好不容易解决了提交，一 git push，直接红屏报错：
+</span></span><span style="display:flex;"><span>plaintext
+</span></span><span style="display:flex;"><span>fatal: unable to access <span style="color:#e6db74">&#39;https://github.com/xxx/xxx.github.io.git/&#39;</span>: Failed to connect to github.com port <span style="color:#ae81ff">443</span> after <span style="color:#ae81ff">21000</span> ms: Timed out
+</span></span><span style="display:flex;"><span>翻译成人话：网络超时，连不上 GitHub 服务器。
+</span></span><span style="display:flex;"><span>这是国内搭 GitHub Pages 最常见的坑。
+</span></span><span style="display:flex;"><span>解决方案（按优先级排序）：
+</span></span><span style="display:flex;"><span>最快见效：连手机热点，直接绕开网络限制，90% 的情况一次成功
+</span></span><span style="display:flex;"><span>代理配置：给 Git 配置代理（默认 7890）
+</span></span><span style="display:flex;"><span>bash
+</span></span><span style="display:flex;"><span>运行
+</span></span><span style="display:flex;"><span>git config --global http.proxy http://127.0.0.1:7890
+</span></span><span style="display:flex;"><span>git config --global https.proxy http://127.0.0.1:7890
+</span></span><span style="display:flex;"><span>一劳永逸：换 SSH 协议
+</span></span><span style="display:flex;"><span>终极兜底：GitHub 网页直接上传文件
+</span></span><span style="display:flex;"><span>坑 3：CSS 全裸奔！页面变成浏览器默认样式
+</span></span><span style="display:flex;"><span>这是最崩溃的一个坑：public 推上去了，打开博客，直接变成了「裸 HTML」—— 紫色下划线链接、无样式标签、排版全乱。
+</span></span><span style="display:flex;"><span>排查结论：浏览器根本没拿到 CSS 文件，HTML 里的 &lt;link&gt; 直接消失了。
+</span></span><span style="display:flex;"><span>根源：Paper 主题用了 Hugo Pipes 资源打包，要求 CSS 文件必须放在 /assets 文件夹，而我把 CSS 放在了 /static 文件夹里！
+</span></span><span style="display:flex;"><span>Hugo 找不到文件，直接不渲染 CSS 代码，连报错都没有。
+</span></span><span style="display:flex;"><span>原主题错误代码：
+</span></span><span style="display:flex;"><span>go
+</span></span><span style="display:flex;"><span>运行
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{{</span>- $main :<span style="color:#f92672">=</span> resources.Get <span style="color:#e6db74">&#34;main.css&#34;</span> | minify -<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{{</span>- $custom :<span style="color:#f92672">=</span> resources.Get <span style="color:#e6db74">&#34;custom.css&#34;</span> | minify -<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{{</span>- $css :<span style="color:#f92672">=</span> slice $main $custom | resources.Concat <span style="color:#e6db74">&#34;main.css&#34;</span> | minify | fingerprint -<span style="color:#f92672">}}</span>
+</span></span><span style="display:flex;"><span>&lt;link rel<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ </span>$css<span style="color:#e6db74">.Permalink }}&#34;</span> integrity<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ </span>$css<span style="color:#e6db74">.Data.Integrity }}&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>坑 4：Hugo Pipes 抽风，CSS 死活不生成
+</span></span><span style="display:flex;"><span>就算把 CSS 放到 assets/，有时候还是会抽风：本地正常，一推 GitHub 样式又没了。
+</span></span><span style="display:flex;"><span>根源就是环境不一致。
+</span></span><span style="display:flex;"><span>三、终极解决方案：100% 生效的 CSS 修复
+</span></span><span style="display:flex;"><span>折腾了整整一天，我终于找到了不管什么环境、100% 生效的 CSS 加载方案。
+</span></span><span style="display:flex;"><span>第一步：彻底替换 head.html 里的 CSS 代码
+</span></span><span style="display:flex;"><span>打开主题的 layouts/partials/head.html，把原来的代码替换成：
+</span></span><span style="display:flex;"><span>html
+</span></span><span style="display:flex;"><span>预览
+</span></span><span style="display:flex;"><span>&lt;!-- 100% 生效的静态CSS加载，彻底绕开Hugo Pipes坑 --&gt;
+</span></span><span style="display:flex;"><span>&lt;link rel<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ `main.css` | absURL }}&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>&lt;link rel<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> href<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ `custom.css` | absURL }}&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>第二步：把 CSS 放回 static 文件夹
+</span></span><span style="display:flex;"><span>确保路径：
+</span></span><span style="display:flex;"><span>plaintext
+</span></span><span style="display:flex;"><span>项目根目录/
+</span></span><span style="display:flex;"><span>├── static/
+</span></span><span style="display:flex;"><span>│   ├── main.css
+</span></span><span style="display:flex;"><span>│   └── custom.css
+</span></span><span style="display:flex;"><span>第三步：本地重新构建 + 强制推送
+</span></span><span style="display:flex;"><span>bash
+</span></span><span style="display:flex;"><span>运行
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 彻底删除旧的public，清除缓存</span>
+</span></span><span style="display:flex;"><span>hugo --gc --minify --cleanDestinationDir
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 强制提交public</span>
+</span></span><span style="display:flex;"><span>git add -f public
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;fix: 彻底修复CSS加载，恢复主题样式&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 强制推送到GitHub</span>
+</span></span><span style="display:flex;"><span>git push -f origin main
+</span></span><span style="display:flex;"><span>第四步：强制刷新浏览器
+</span></span><span style="display:flex;"><span>打开博客，按：
+</span></span><span style="display:flex;"><span>Ctrl + Shift + R（Windows）
+</span></span><span style="display:flex;"><span>Cmd + Shift + R（Mac）
+</span></span><span style="display:flex;"><span>样式立刻恢复正常！
+</span></span><span style="display:flex;"><span>四、最终效果：完美运行的博客
+</span></span><span style="display:flex;"><span>经过这一系列折腾，我的 Hugo 博客终于完美上线了：
+</span></span><span style="display:flex;"><span>Paper 主题的米白背景、圆角标签、极简排版，完全正常
+</span></span><span style="display:flex;"><span>导航栏、文章列表、标签页，样式丝滑
+</span></span><span style="display:flex;"><span>本地、GitHub Pages 访问，CSS 100% 加载，再也不裸奔
+</span></span><span style="display:flex;"><span>从最开始的连环报错，到最终的完美运行，这种从 <span style="color:#ae81ff">0</span> 到 <span style="color:#ae81ff">1</span> 搞定一个项目的成就感，真的太爽了。
+</span></span><span style="display:flex;"><span>五、后续优化：让博客更丝滑
+</span></span><span style="display:flex;"><span>1. 开启 GitHub Actions 自动部署
+</span></span><span style="display:flex;"><span>彻底告别手动推 public，以后改完代码，只需要 git push，GitHub 自动帮你构建、部署，零操作。
+</span></span><span style="display:flex;"><span>完整配置文件 .github/workflows/deploy.yml：
+</span></span><span style="display:flex;"><span>yaml
+</span></span><span style="display:flex;"><span>name: Deploy Hugo site to Pages
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>on:
+</span></span><span style="display:flex;"><span>  push:
+</span></span><span style="display:flex;"><span>    branches: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;main&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  workflow_dispatch:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>permissions:
+</span></span><span style="display:flex;"><span>  contents: read
+</span></span><span style="display:flex;"><span>  pages: write
+</span></span><span style="display:flex;"><span>  id-token: write
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>concurrency:
+</span></span><span style="display:flex;"><span>  group: <span style="color:#e6db74">&#34;pages&#34;</span>
+</span></span><span style="display:flex;"><span>  cancel-in-progress: false
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>jobs:
+</span></span><span style="display:flex;"><span>  build:
+</span></span><span style="display:flex;"><span>    runs-on: ubuntu-latest
+</span></span><span style="display:flex;"><span>    steps:
+</span></span><span style="display:flex;"><span>      - name: Checkout
+</span></span><span style="display:flex;"><span>        uses: actions/checkout@v4
+</span></span><span style="display:flex;"><span>        with:
+</span></span><span style="display:flex;"><span>          submodules: true
+</span></span><span style="display:flex;"><span>          fetch-depth: <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - name: Setup Hugo
+</span></span><span style="display:flex;"><span>        uses: peaceiris/actions-hugo@v2
+</span></span><span style="display:flex;"><span>        with:
+</span></span><span style="display:flex;"><span>          hugo-version: <span style="color:#e6db74">&#39;latest&#39;</span>
+</span></span><span style="display:flex;"><span>          extended: true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - name: Build
+</span></span><span style="display:flex;"><span>        run: hugo --gc --minify --cleanDestinationDir
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      - name: Upload artifact
+</span></span><span style="display:flex;"><span>        uses: actions/upload-pages-artifact@v3
+</span></span><span style="display:flex;"><span>        with:
+</span></span><span style="display:flex;"><span>          path: ./public
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  deploy:
+</span></span><span style="display:flex;"><span>    environment:
+</span></span><span style="display:flex;"><span>      name: github-pages
+</span></span><span style="display:flex;"><span>      url: <span style="color:#e6db74">${</span>{ steps.deployment.outputs.page_url <span style="color:#e6db74">}</span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    runs-on: ubuntu-latest
+</span></span><span style="display:flex;"><span>    needs: build
+</span></span><span style="display:flex;"><span>    steps:
+</span></span><span style="display:flex;"><span>      - name: Deploy to GitHub Pages
+</span></span><span style="display:flex;"><span>        id: deployment
+</span></span><span style="display:flex;"><span>        uses: actions/deploy-pages@v4
+</span></span><span style="display:flex;"><span>2. 接入 Cloudflare CDN
+</span></span><span style="display:flex;"><span>给博客加速、加防护，国内访问秒开，还能免费申请 SSL 证书，让你的网址显示「绿色小锁」。
+</span></span><span style="display:flex;"><span>3. 接入 Umami 访客统计
+</span></span><span style="display:flex;"><span>替代 Google Analytics，国内可访问，隐私友好，零广告，完美适配 Hugo 博客。
+</span></span><span style="display:flex;"><span>六、写在最后
+</span></span><span style="display:flex;"><span>折腾 Hugo 博客的这几天，真的是「一边崩溃，一边自愈」。
+</span></span><span style="display:flex;"><span>从最开始的「怎么推都推不上」，到「CSS 裸奔到怀疑人生」，再到最终的完美上线，每一个坑，都是成长的印记。
+</span></span><span style="display:flex;"><span>如果你也在折腾 Hugo 博客，遇到了和我一样的问题，照着这篇文章走，绝对能少走 99% 的弯路。
+</span></span><span style="display:flex;"><span>愿每一个折腾博客的人，都能拥有一个属于自己的、完美的小天地。
+</span></span><span style="display:flex;"><span>plaintext
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 🚀 现在直接推送到 GitHub（复制这 4 行）</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">```</span>powershell
+</span></span><span style="display:flex;"><span>hugo --gc --minify
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;发布：我的Hugo博客搭建实录-终案&#34;</span>
+</span></span><span style="display:flex;"><span>git push -f origin main
+</span></span><span style="display:flex;"><span>推完 强制刷新 就能看到啦！🎉
+</span></span></code></pre></div>
   </div>
 </main>
 </main><footer
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
 >
   <div class="mr-auto">&copy;2026
-    <a class="link" href="https://ayublog-github-io.vercel.app/">钰de个人博客</a></div>
+    <a class="link" href="http://localhost:1313/">钰de个人博客</a></div>
   <footer
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center justify-center px-8 text-xs tracking-wider uppercase opacity-60"
 >

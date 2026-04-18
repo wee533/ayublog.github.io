@@ -11,7 +11,7 @@
   style="--bg:#faf8f1"
   lang="zh-CN"
   dir="ltr"
-><head>
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta
@@ -52,11 +52,11 @@
 原因：首页 _index.md 文件缺失/格式错误，Hugo 找不到首页文件
 解决：补全正确的首页 Front Matter，用 hugo --gc 强制清缓存，重新构建，404 直接消失。" />
   <meta name="author" content="钰de个人博客" />
-<link rel="stylesheet" href="https://ayublog-github-io.vercel.app/main.css" />
-<link rel="stylesheet" href="https://ayublog-github-io.vercel.app/custom.css" />
+<link rel="stylesheet" href="http://localhost:1313/main.css" />
+<link rel="stylesheet" href="http://localhost:1313/custom.css" />
 
   
-  <link rel="preload" as="image" href="https://ayublog-github-io.vercel.app/theme.png" />
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
 
   
 
@@ -64,60 +64,21 @@
 
   <script
     defer
-    src="https://ayublog-github-io.vercel.app/highlight.min.js"
+    src="http://localhost:1313/highlight.min.js"
     onload="hljs.initHighlightingOnLoad()"
   ></script>
 
   
   <link
     rel="icon"
-    href="https://ayublog-github-io.vercel.app/favicon.ico"
+    href="http://localhost:1313/favicon.ico"
   />
   <link
     rel="apple-touch-icon"
-    href="https://ayublog-github-io.vercel.app/apple-touch-icon.png"
+    href="http://localhost:1313/apple-touch-icon.png"
   />
 
   <meta name="generator" content="Hugo 0.159.2">
-  <meta itemprop="name" content="我的 Hugo 博客搭建全记录：从踩坑到胜利的完整复盘">
-  <meta itemprop="description" content="🎉 写在前面 终于！在经历了无数次报错、404、样式全崩、Git 冲突之后，我的个人博客终于完整跑通了！从最开始的「本地裸奔、线上404」，到现在主题正常、评论系统上线，这一路真的太坎坷了，索性把所有坑都记录下来，给同样新手的朋友做个参考，也给自己留个纪念✨
-🚀 搭建背景 作为一个刚入门的前端/技术爱好者，一直想拥有一个完全属于自己的个人博客，用来记录学习、生活和技术成长。对比了很多方案后，最终选择了 Hugo &#43; GitHub Pages 组合：
-完全免费，用 GitHub 托管，不用买服务器 生成速度极快，静态页面访问流畅 主题生态丰富，高度可定制化 用 Markdown 写文章，简单高效 本以为是「一键部署」的轻松活，没想到直接踩满了所有新手坑…
-🚨 全程踩坑记录（血泪史） 1. 第一坑：主题样式全崩，本地/线上全是「裸奔」页面 最开始用了 Paper 主题，结果本地打开就是纯文字、蓝色超链接，完全没有任何样式，相当于只渲染了 HTML 骨架，没穿「衣服」。 原因：主题配置错误 &#43; 样式文件损坏 &#43; 浏览器缓存三重干扰 解决：果断换成成熟的 Moments 主题，彻底删除旧主题，强制切换主题配置，全链路清缓存，终于样式正常。
-2. 第二坑：Git 推送失败，远程仓库冲突 改完配置准备推送到 GitHub，结果直接报错：Updates were rejected because the remote contains work that you do not have locally 原因：在 GitHub 网页上删文件、改配置，直接修改了远程仓库，本地没同步，导致提交记录不一致 解决：用 git pull origin main --rebase 同步远程更新，再执行推送，完美解决冲突。
-3. 第三坑：GitHub Actions 部署卡壳，本地404 线上部署成功了，结果本地直接 404 Not Found，线上正常本地崩 原因：首页 _index.md 文件缺失/格式错误，Hugo 找不到首页文件 解决：补全正确的首页 Front Matter，用 hugo --gc 强制清缓存，重新构建，404 直接消失。">
-  <meta itemprop="datePublished" content="2026-04-12T16:00:00+08:00">
-  <meta itemprop="dateModified" content="2026-04-12T16:00:00+08:00">
-  <meta itemprop="wordCount" content="204">
-  <meta itemprop="keywords" content="Hugo,博客搭建,踩坑记录,技术分享"><meta property="og:url" content="https://ayublog-github-io.vercel.app/posts/hugo-build-journey/">
-  <meta property="og:site_name" content="钰de个人博客">
-  <meta property="og:title" content="我的 Hugo 博客搭建全记录：从踩坑到胜利的完整复盘">
-  <meta property="og:description" content="🎉 写在前面 终于！在经历了无数次报错、404、样式全崩、Git 冲突之后，我的个人博客终于完整跑通了！从最开始的「本地裸奔、线上404」，到现在主题正常、评论系统上线，这一路真的太坎坷了，索性把所有坑都记录下来，给同样新手的朋友做个参考，也给自己留个纪念✨
-🚀 搭建背景 作为一个刚入门的前端/技术爱好者，一直想拥有一个完全属于自己的个人博客，用来记录学习、生活和技术成长。对比了很多方案后，最终选择了 Hugo &#43; GitHub Pages 组合：
-完全免费，用 GitHub 托管，不用买服务器 生成速度极快，静态页面访问流畅 主题生态丰富，高度可定制化 用 Markdown 写文章，简单高效 本以为是「一键部署」的轻松活，没想到直接踩满了所有新手坑…
-🚨 全程踩坑记录（血泪史） 1. 第一坑：主题样式全崩，本地/线上全是「裸奔」页面 最开始用了 Paper 主题，结果本地打开就是纯文字、蓝色超链接，完全没有任何样式，相当于只渲染了 HTML 骨架，没穿「衣服」。 原因：主题配置错误 &#43; 样式文件损坏 &#43; 浏览器缓存三重干扰 解决：果断换成成熟的 Moments 主题，彻底删除旧主题，强制切换主题配置，全链路清缓存，终于样式正常。
-2. 第二坑：Git 推送失败，远程仓库冲突 改完配置准备推送到 GitHub，结果直接报错：Updates were rejected because the remote contains work that you do not have locally 原因：在 GitHub 网页上删文件、改配置，直接修改了远程仓库，本地没同步，导致提交记录不一致 解决：用 git pull origin main --rebase 同步远程更新，再执行推送，完美解决冲突。
-3. 第三坑：GitHub Actions 部署卡壳，本地404 线上部署成功了，结果本地直接 404 Not Found，线上正常本地崩 原因：首页 _index.md 文件缺失/格式错误，Hugo 找不到首页文件 解决：补全正确的首页 Front Matter，用 hugo --gc 强制清缓存，重新构建，404 直接消失。">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-04-12T16:00:00+08:00">
-    <meta property="article:modified_time" content="2026-04-12T16:00:00+08:00">
-    <meta property="article:tag" content="Hugo">
-    <meta property="article:tag" content="博客搭建">
-    <meta property="article:tag" content="踩坑记录">
-    <meta property="article:tag" content="技术分享">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="我的 Hugo 博客搭建全记录：从踩坑到胜利的完整复盘">
-  <meta name="twitter:description" content="🎉 写在前面 终于！在经历了无数次报错、404、样式全崩、Git 冲突之后，我的个人博客终于完整跑通了！从最开始的「本地裸奔、线上404」，到现在主题正常、评论系统上线，这一路真的太坎坷了，索性把所有坑都记录下来，给同样新手的朋友做个参考，也给自己留个纪念✨
-🚀 搭建背景 作为一个刚入门的前端/技术爱好者，一直想拥有一个完全属于自己的个人博客，用来记录学习、生活和技术成长。对比了很多方案后，最终选择了 Hugo &#43; GitHub Pages 组合：
-完全免费，用 GitHub 托管，不用买服务器 生成速度极快，静态页面访问流畅 主题生态丰富，高度可定制化 用 Markdown 写文章，简单高效 本以为是「一键部署」的轻松活，没想到直接踩满了所有新手坑…
-🚨 全程踩坑记录（血泪史） 1. 第一坑：主题样式全崩，本地/线上全是「裸奔」页面 最开始用了 Paper 主题，结果本地打开就是纯文字、蓝色超链接，完全没有任何样式，相当于只渲染了 HTML 骨架，没穿「衣服」。 原因：主题配置错误 &#43; 样式文件损坏 &#43; 浏览器缓存三重干扰 解决：果断换成成熟的 Moments 主题，彻底删除旧主题，强制切换主题配置，全链路清缓存，终于样式正常。
-2. 第二坑：Git 推送失败，远程仓库冲突 改完配置准备推送到 GitHub，结果直接报错：Updates were rejected because the remote contains work that you do not have locally 原因：在 GitHub 网页上删文件、改配置，直接修改了远程仓库，本地没同步，导致提交记录不一致 解决：用 git pull origin main --rebase 同步远程更新，再执行推送，完美解决冲突。
-3. 第三坑：GitHub Actions 部署卡壳，本地404 线上部署成功了，结果本地直接 404 Not Found，线上正常本地崩 原因：首页 _index.md 文件缺失/格式错误，Hugo 找不到首页文件 解决：补全正确的首页 Front Matter，用 hugo --gc 强制清缓存，重新构建，404 直接消失。">
-
-  <link rel="canonical" href="https://ayublog-github-io.vercel.app/posts/hugo-build-journey/" />
 
 <script defer src="https://cloud.umami.is/script.js" data-website-id="28e01c67-12a4-41df-bac5-5ebbfc3198bb"></script>
 </head><body
@@ -128,7 +89,7 @@
   <div class="relative z-50 flex items-center ltr:mr-auto rtl:ml-auto">
     <a
       class="-translate-y-[1px] text-2xl font-medium"
-      href="https://ayublog-github-io.vercel.app/"
+      href="http://localhost:1313/"
       >钰de个人博客</a
     >
     <div
@@ -297,7 +258,7 @@
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center px-8 text-xs tracking-wider uppercase opacity-60"
 >
   <div class="mr-auto">&copy;2026
-    <a class="link" href="https://ayublog-github-io.vercel.app/">钰de个人博客</a></div>
+    <a class="link" href="http://localhost:1313/">钰de个人博客</a></div>
   <footer
   class="mx-auto flex h-[4.5rem] max-w-(--w) items-center justify-center px-8 text-xs tracking-wider uppercase opacity-60"
 >
