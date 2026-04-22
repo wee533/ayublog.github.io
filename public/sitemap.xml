@@ -3,10 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-04-18T17:59:00+08:00</lastmod>
+    <lastmod>2026-04-22T00:00:00+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2026-04-18T17:59:00+08:00</lastmod>
+    <lastmod>2026-04-22T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2026-04-22T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2026-04-22T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/cailei/</loc>
+    <lastmod>2026-04-22T00:00:00+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/youke-zhidao/</loc>
     <lastmod>2026-04-18T17:59:00+08:00</lastmod>
