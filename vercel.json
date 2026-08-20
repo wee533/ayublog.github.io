@@ -1,0 +1,4 @@
+{
+  "buildCommand": "hugo --gc --minify -D -F -b https://ayublog-github-io.vercel.app/",
+  "outputDirectory": "public"
+}
